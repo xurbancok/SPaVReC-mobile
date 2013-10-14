@@ -24,8 +24,9 @@
             </intent-filter>
         </activity>
         <activity 
-            android:name="sk.fiit.remotefiit.activity.Sensors"
-            ></activity>
+          android:name="sk.fiit.remotefiit.activity.MotionActivity"
+          android:launchMode="singleTask"
+        ></activity>
     </application>
 
 </manifest>
