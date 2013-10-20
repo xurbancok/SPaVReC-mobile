@@ -16,7 +16,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="sk.fiit.remotefiit.activity.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,6 +27,12 @@
         <activity 
           android:name="sk.fiit.remotefiit.activity.MotionActivity"
           android:launchMode="singleTask"
+          android:screenOrientation="portrait"
+        ></activity>
+         <activity 
+          android:name="sk.fiit.remotefiit.activity.MotionActivityPedestrian"
+          android:launchMode="singleTask"
+          android:screenOrientation="portrait"
         ></activity>
     </application>
 

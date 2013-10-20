@@ -1,47 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    <EditText
-        android:id="@+id/editTextIP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="64dp"
-        android:hint="192.168.1.1:1234"
-        android:ems="10" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editText1"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_marginBottom="44dp"
-        android:text="@string/host_ip"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+    android:layout_height="match_parent"
+    android:background="@color/main_menu_background" >
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
+        android:layout_alignParentLeft="true"
         android:onClick="startMotion"
-        android:text="Start"/>
+        android:text="Start (temp)" />
 
-    <Button
-        android:id="@+id/button2"
+    <ImageButton
+        android:id="@+id/imageButtonPedestrian"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="80dp"
+        android:onClick="startMotionPedestrian"
+        android:background="@drawable/pedestrian_icon" />
+
+    <ImageButton
+        android:id="@+id/imageButtonHelicopter"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="30dp"
+        android:onClick="startMotionHelicopter"
+        android:background="@drawable/helicopter_icon" />
+
+    <ImageButton
+        android:id="@+id/imageButtonCar"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_alignLeft="@+id/imageButtonPedestrian"
+        android:layout_below="@+id/imageButtonPedestrian"
+        android:layout_marginTop="30dp"
+        android:onClick="startMotionCar"
+        android:background="@drawable/car_icon" />
+
+    <ImageButton
+        android:id="@+id/imageButtonSettings"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_alignLeft="@+id/imageButtonHelicopter"
+        android:layout_below="@+id/imageButtonHelicopter"
+        android:layout_marginTop="30dp"
+        android:onClick="onClickSettings"
+        android:background="@drawable/settings_icon" />
+
+    <TextView
+        android:id="@+id/textViewServerInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editTextIP"
-        android:layout_alignRight="@+id/editTextIP"
-        android:layout_below="@+id/editTextIP"
-        android:layout_marginTop="84dp"
-        android:onClick="readQRCode"
-        android:text="Read QR Code" />
+        android:layout_above="@+id/button1"
+        android:layout_alignLeft="@+id/imageButtonCar"
+        android:layout_marginBottom="13dp"
+        android:text="@string/server_settings"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android:id="@+id/imageViewIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/textViewServerInfo"
+        android:layout_alignRight="@+id/imageButtonSettings"
+        android:background="@drawable/kriz" />
 
 </RelativeLayout>

@@ -57,8 +57,6 @@ public class MotionActivity extends Activity implements SensorEventListener{
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 		StrictMode.setThreadPolicy(policy);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		
 
 		try {
 			IPAddress = InetAddress.getByName(getIntent().getStringExtra("IP"));	//ziska IP
