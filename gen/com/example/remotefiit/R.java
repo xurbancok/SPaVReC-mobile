@@ -18,17 +18,19 @@ public final class R {
         public static final int fajka=0x7f020001;
         public static final int helicopter_icon=0x7f020002;
         public static final int ic_launcher=0x7f020003;
-        public static final int kriz=0x7f020004;
-        public static final int pedestrian_icon=0x7f020005;
-        public static final int qr_code=0x7f020006;
-        public static final int settings_icon=0x7f020007;
+        public static final int joystick_stred=0x7f020004;
+        public static final int joystick_zaklad=0x7f020005;
+        public static final int kriz=0x7f020006;
+        public static final int pedestrian_icon=0x7f020007;
+        public static final int qr_code=0x7f020008;
+        public static final int settings_icon=0x7f020009;
     }
     public static final class id {
         public static final int AbsoluteLayout1=0x7f080007;
         public static final int button1=0x7f080000;
-        public static final int buttonCancel=0x7f080012;
+        public static final int buttonCancel=0x7f080014;
         public static final int buttonFunction=0x7f08000c;
-        public static final int buttonOk=0x7f080013;
+        public static final int buttonOk=0x7f080015;
         public static final int buttonReset=0x7f08000d;
         public static final int editText1=0x7f08000a;
         public static final int editText2=0x7f080009;
@@ -37,11 +39,13 @@ public final class R {
         public static final int imageButtonCar=0x7f080003;
         public static final int imageButtonHelicopter=0x7f080002;
         public static final int imageButtonPedestrian=0x7f080001;
-        public static final int imageButtonQr=0x7f080010;
+        public static final int imageButtonQr=0x7f080012;
         public static final int imageButtonSettings=0x7f080004;
         public static final int imageViewIcon=0x7f080006;
-        public static final int linearLayout1=0x7f080011;
-        public static final int menu_settings=0x7f080014;
+        public static final int imageViewStred=0x7f080011;
+        public static final int imageViewZaklad=0x7f080010;
+        public static final int linearLayout1=0x7f080013;
+        public static final int menu_settings=0x7f080016;
         public static final int textView1=0x7f08000e;
         public static final int textView2=0x7f08000f;
         public static final int textViewServerInfo=0x7f080005;
