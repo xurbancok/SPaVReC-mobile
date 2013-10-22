@@ -18,6 +18,10 @@ public class PositionData {
 	private double magneticFieldY;
 	private double magneticFieldZ;
 	
+	private double linearAccelerationX;
+	private double linearAccelerationY;
+	private double linearAccelerationZ;
+	
 	private double proximity;
 
 	public void setProximity(double proximity) {
@@ -126,5 +130,29 @@ public class PositionData {
 	
 	private double roundTwoDecimals(double d){
 	    return Double.valueOf(String.format("%.2f", d).replace(",", "."));
+	}
+
+	public double getLinearAccelerationX() {
+		return linearAccelerationX;
+	}
+
+	public void setLinearAccelerationX(double linearAccelerationX) {
+		this.linearAccelerationX = roundTwoDecimals(linearAccelerationX);
+	}
+
+	public double getLinearAccelerationY() {
+		return linearAccelerationY;
+	}
+
+	public void setLinearAccelerationY(double linearAccelerationY) {
+		this.linearAccelerationY = roundTwoDecimals(linearAccelerationY);
+	}
+
+	public double getLinearAccelerationZ() {
+		return linearAccelerationZ;
+	}
+
+	public void setLinearAccelerationZ(double linearAccelerationZ) {
+		this.linearAccelerationZ = roundTwoDecimals(linearAccelerationZ);
 	}
 }

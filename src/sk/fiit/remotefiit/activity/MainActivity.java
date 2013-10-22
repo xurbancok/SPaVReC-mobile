@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 	public void startMotion(View view){
 		if(hostAdress==null || hostAdress.length()==0)hostAdress="123.123.123.123:1234";
 		String[] host = hostAdress.split(":");
-		Intent motion = new Intent(getApplicationContext(),MotionActivity.class);
+		Intent motion = new Intent(getApplicationContext(),MotionActivityOld.class);
 		motion.putExtra("IP", host[0]);
 		motion.putExtra("port", host[1]);
 		startActivity(motion);
@@ -64,15 +64,31 @@ public class MainActivity extends Activity {
 	}
 	
 	public void startMotionPedestrian(View view){
+		if(hostAdress==null || hostAdress.length()==0)hostAdress="123.123.123.123:1234";
+		String[] host = hostAdress.split(":");
 		Toast.makeText(this, "Pedestrian", Toast.LENGTH_SHORT).show();
 		Intent i = new Intent(getApplicationContext(),MotionActivityPedestrian.class);
+		i.putExtra("IP", host[0]);
+		i.putExtra("port", host[1]);
 		startActivity(i);
 	}
 	public void startMotionHelicopter(View view){
+		if(hostAdress==null || hostAdress.length()==0)hostAdress="123.123.123.123:1234";
+		String[] host = hostAdress.split(":");
 		Toast.makeText(this, "Helicopter", Toast.LENGTH_SHORT).show();
+		Intent i = new Intent(getApplicationContext(),MotionActivityHelicopter.class);
+		i.putExtra("IP", host[0]);
+		i.putExtra("port", host[1]);
+		startActivity(i);
 	}
 	public void startMotionCar(View view){
+		if(hostAdress==null || hostAdress.length()==0)hostAdress="123.123.123.123:1234";
+		String[] host = hostAdress.split(":");
 		Toast.makeText(this, "Car", Toast.LENGTH_SHORT).show();
+		Intent i = new Intent(getApplicationContext(),MotionActivityCar.class);
+		i.putExtra("IP", host[0]);
+		i.putExtra("port", host[1]);
+		startActivity(i);
 	}
 //	
 //	public void readQRCode(View view){

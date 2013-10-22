@@ -1,64 +1,68 @@
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/AbsoluteLayout1"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".MainActivity" >
+    android:layout_height="match_parent"
 
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="152dp"
-        android:layout_height="wrap_content"
-        android:layout_x="8dp"
-        android:layout_y="-1dp"
-        android:ems="10"
-        android:inputType="textMultiLine" >
+    android:orientation="vertical" >
 
-        <requestFocus />
-    </EditText>
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="153dp"
-        android:layout_height="wrap_content"
-        android:layout_x="164dp"
-        android:layout_y="2dp"
-        android:ems="10"
-        android:inputType="textMultiLine" />
-
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="154dp"
-        android:layout_height="wrap_content"
-        android:layout_x="5dp"
-        android:layout_y="160dp"
-        android:ems="10"
-        android:inputType="textMultiLine" />
-
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="149dp"
-        android:layout_height="wrap_content"
-        android:layout_x="166dp"
-        android:layout_y="163dp"
-        android:ems="10"
-        android:inputType="textMultiLine" />
-
-    <Button
-        android:id="@+id/buttonFunction"
-        android:layout_width="270dp"
-        android:layout_height="121dp"
-        android:layout_x="26dp"
-        android:layout_y="276dp"
-        android:text="Button" />
-
-    <Button
-        android:id="@+id/buttonReset"
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="11dp"
-        android:layout_y="431dp"
-        android:onClick="resetPosition"
-        android:text="reset" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-</AbsoluteLayout>
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android:id="@+id/imageViewZaklad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:src="@drawable/joystick_zaklad" />
+
+    <ImageView
+        android:id="@+id/imageViewButtonLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:adjustViewBounds="true"
+        android:src="@drawable/button_left" />
+     
+     <ImageView
+        android:id="@+id/imageViewButtonRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:adjustViewBounds="true"
+        android:src="@drawable/button_right" />
+
+     <ImageView
+         android:id="@+id/imageViewStred"
+         android:layout_width="240dp"
+         android:layout_height="240dp"
+         android:src="@drawable/joystick_stred" />
+
+</RelativeLayout>

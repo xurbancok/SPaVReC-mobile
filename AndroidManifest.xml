@@ -25,12 +25,22 @@
             </intent-filter>
         </activity>
         <activity 
-          android:name="sk.fiit.remotefiit.activity.MotionActivity"
+          android:name="sk.fiit.remotefiit.activity.MotionActivityOld"
           android:launchMode="singleTask"
           android:screenOrientation="portrait"
         ></activity>
          <activity 
           android:name="sk.fiit.remotefiit.activity.MotionActivityPedestrian"
+          android:launchMode="singleTask"
+          android:screenOrientation="portrait"
+        ></activity>
+        <activity 
+          android:name="sk.fiit.remotefiit.activity.MotionActivityHelicopter"
+          android:launchMode="singleTask"
+          android:screenOrientation="portrait"
+        ></activity>
+        <activity 
+          android:name="sk.fiit.remotefiit.activity.MotionActivityCar"
           android:launchMode="singleTask"
           android:screenOrientation="portrait"
         ></activity>
