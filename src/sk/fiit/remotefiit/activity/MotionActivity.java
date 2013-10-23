@@ -1,10 +1,7 @@
 package sk.fiit.remotefiit.activity;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-
-import org.json.JSONException;
 
 import sk.fiit.remotefiit.obj.DataToMovementTransformation;
 import sk.fiit.remotefiit.obj.JSONCreator;
@@ -47,18 +44,14 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 	//============ z povodneho prototypu zo zakladnej triedy =======
 	protected SensorManager mSensorManager;
 	protected Sensor gyroscope, accelerometer, proximity, orientation, magneticField, linearAcceleration;
-	protected TextView proxi, gyro, acce, orient;
 	protected PositionData positionData = new PositionData();
 	protected DataToMovementTransformation dataToMovementTransformation = new DataToMovementTransformation();
 	protected JSONCreator jsonCreator = new JSONCreator();
-	protected int lock = 0;
 	protected boolean reset = false;
-	protected boolean extendedFunction = false;
 	protected InetAddress IPAddress = null;
 	protected int port;
 	//==============================================================
-	
-	
+		
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -105,7 +98,10 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 		joystickStred.setOnTouchListener(new OnTouchListener() {
 			double a=0,b=0,c=0,x1,y1;
 			int touchX,touchY, eventId;
+			int joystickCenterX = joystickZaklad.getLeft()+((int)joystickZaklad.getWidth()/2);
+			int joystickCenterY = joystickZaklad.getTop()+((int)joystickZaklad.getHeight()/2);
 			RelativeLayout.LayoutParams joystickStredLayoutParams;
+
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				eventId = event.getAction();
@@ -126,18 +122,44 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 						x1 = (touchX>centerX ? (centerX+x1) : (centerX-x1));
 						y1 = (touchY>centerY ? (centerY+y1) : (centerY-y1));
 
-						joystickStredLayoutParams.leftMargin = (int) Math.round(x1)- (joystickStred.getHeight()/2);
-						joystickStredLayoutParams.topMargin = (int) Math.round(y1)- (joystickStred.getWidth()/2);
+						joystickStredLayoutParams.leftMargin = (int) Math.round(x1)- (joystickStred.getWidth()/2);
+						joystickStredLayoutParams.topMargin = (int) Math.round(y1)- (joystickStred.getHeight()/2);
 						joystickStred.setLayoutParams(joystickStredLayoutParams);
 						//=====================
-						return true;
+					}else{
+						joystickStredLayoutParams.leftMargin = touchX - (joystickStred.getWidth()/2);
+						joystickStredLayoutParams.topMargin = touchY - (joystickStred.getHeight()/2);
+						joystickStred.setLayoutParams(joystickStredLayoutParams);
 					}
-					joystickStredLayoutParams.leftMargin = touchX - (joystickStred.getHeight()/2);
-					joystickStredLayoutParams.topMargin = touchY - (joystickStred.getWidth()/2);
-					joystickStred.setLayoutParams(joystickStredLayoutParams);
+					
+					if(joystickStredLayoutParams.leftMargin+(joystickStred.getWidth()/2)>=joystickCenterX+30){
+						positionData.setJoystickRight(true);
+						//ak drzim prst na joysticku a beham po celej ploche, tak zostanu nastavene vsetky premenne
+						//a potom pri spracovani dat urci zle pohyb, lebo je tam if...else if
+						positionData.setJoystickLeft(false);
+						xCoord.setText("vpravo");
+					}
+					else if(joystickStredLayoutParams.leftMargin+(joystickStred.getWidth()/2)<=joystickCenterX-30){
+						positionData.setJoystickLeft(true);
+						positionData.setJoystickRight(false);
+						xCoord.setText("vlavo");
+					}
+					if(joystickStredLayoutParams.topMargin+(joystickStred.getHeight()/2)>=joystickCenterY+30){
+						positionData.setJoystickDown(true);
+						positionData.setJoystickUp(false);
+						yCoord.setText("dole");
+					}
+					else if(joystickStredLayoutParams.topMargin+(joystickStred.getHeight()/2)<=joystickCenterY-30){
+						positionData.setJoystickUp(true);
+						positionData.setJoystickDown(false);
+						yCoord.setText("hore");
+					}
+					
 					break;
 				case MotionEvent.ACTION_UP:
 					MotionActivity.this.centerJoystick();
+					positionData.resetJoystick();
+					xCoord.setText("");	yCoord.setText("");
 					break;
 				default:
 					break;
@@ -225,41 +247,9 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 		// TODO Auto-generated method stub
 	}
 
-	@Override
-	public void onSensorChanged(SensorEvent event) {
-		switch (event.sensor.getType()) {
-		case (Sensor.TYPE_GYROSCOPE):
-			positionData.setGyroscopeX(event.values[0]);
-			positionData.setGyroscopeY(event.values[1]);
-			positionData.setGyroscopeZ(event.values[2]);
-			break;
-		case (Sensor.TYPE_ACCELEROMETER):
-			positionData.setAccelerometerX(event.values[0]);
-			positionData.setAccelerometerY(event.values[1]);
-			positionData.setAccelerometerZ(event.values[2]);
-			break;
-		case (Sensor.TYPE_PROXIMITY):
-			positionData.setProximity(event.values[0]);
-			break;
-		case (Sensor.TYPE_ORIENTATION):
-			positionData.setOrientationX(event.values[0]);
-			positionData.setOrientationY(event.values[1]);
-			positionData.setOrientationZ(event.values[2]);
-			break;
-		case (Sensor.TYPE_MAGNETIC_FIELD):
-			positionData.setMagneticFieldX(event.values[0]);
-			positionData.setMagneticFieldY(event.values[1]);
-			positionData.setMagneticFieldZ(event.values[2]);
-			break;
-		case (Sensor.TYPE_LINEAR_ACCELERATION):
-			positionData.setLinearAccelerationX(event.values[0]);
-			positionData.setLinearAccelerationY(event.values[1]);
-			positionData.setLinearAccelerationZ(event.values[2]);
-			break;
-		}
-		dataProcessing(positionData);
-	}
+
+	abstract public void onSensorChanged(SensorEvent event);
 	
-	protected abstract void dataProcessing(PositionData positionData);
+	protected abstract void dataProcessing(PositionData positionData) throws Exception;
 	protected abstract void senzorRegistering();	
 }

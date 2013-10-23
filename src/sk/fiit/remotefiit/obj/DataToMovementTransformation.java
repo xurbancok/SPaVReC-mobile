@@ -13,7 +13,6 @@ public class DataToMovementTransformation implements DataTransformation{
 	public ArrayList<Movement> rawData(PositionData inputData, boolean extendedFunction, boolean reset) {
 
 		ArrayList<Movement> output = new ArrayList<Movement>();
-		
 		if (reset==true) startPosition=null;
 		if(startPosition == null){
 			startPosition = new PositionData();
@@ -76,7 +75,100 @@ public class DataToMovementTransformation implements DataTransformation{
 				output.add(Movement.LOOK_LEFT);
 			}
 		}
+		return output;
+	}
+
+	@Override
+	public ArrayList<Movement> pedestrianData(PositionData inputData) {
+		ArrayList<Movement> output = new ArrayList<Movement>();
 		
+		if(inputData.getAccelerometerY() < 3){
+			output.add(Movement.MOVE_FORWARDS);
+		}
+		else if(inputData.getAccelerometerY() > 7){
+			output.add(Movement.MOVE_BACKWARDS);
+		}
+		if(inputData.getAccelerometerX() > 3){
+			output.add(Movement.MOVE_LEFT);
+		}
+		else if(inputData.getAccelerometerX() < -3){
+			output.add(Movement.MOVE_RIGHT);
+		}	
+		if(inputData.isJoystickDown()){
+			output.add(Movement.LOOK_DOWN);
+		}
+		else if(inputData.isJoystickUp()){
+			output.add(Movement.LOOK_UP);
+		}
+		if(inputData.isJoystickLeft()){
+			output.add(Movement.LOOK_LEFT);
+		}
+		else if(inputData.isJoystickRight()){
+			output.add(Movement.LOOK_RIGHT);
+		}
+		return output;
+	}
+
+	@Override
+	public ArrayList<Movement> helicopterData(PositionData inputData) {
+		ArrayList<Movement> output = new ArrayList<Movement>();
+		
+		if(inputData.getAccelerometerY() < 3){
+			output.add(Movement.MOVE_FORWARDS);
+		}
+		else if(inputData.getAccelerometerY() > 7){
+			output.add(Movement.MOVE_BACKWARDS);
+		}
+		if(inputData.getAccelerometerX() > 3){
+			output.add(Movement.MOVE_LEFT);
+		}
+		else if(inputData.getAccelerometerX() < -3){
+			output.add(Movement.MOVE_RIGHT);
+		}	
+		if(inputData.isJoystickDown()){
+			output.add(Movement.LOOK_DOWN);
+		}
+		else if(inputData.isJoystickUp()){
+			output.add(Movement.LOOK_UP);
+		}
+		if(inputData.isJoystickLeft()){
+			output.add(Movement.LOOK_LEFT);
+		}
+		else if(inputData.isJoystickRight()){
+			output.add(Movement.LOOK_RIGHT);
+		}
+		return output;
+
+	}
+
+	@Override
+	public ArrayList<Movement> carData(PositionData inputData) {
+		ArrayList<Movement> output = new ArrayList<Movement>();
+		
+		if(inputData.getAccelerometerY() < -1.5){
+			output.add(Movement.LOOK_LEFT);
+		}
+		else if(inputData.getAccelerometerY() > 1.5){
+			output.add(Movement.LOOK_RIGHT);
+		}
+		if(inputData.getAccelerometerX() < 4){
+			output.add(Movement.MOVE_FORWARDS);
+		}
+		else if(inputData.getAccelerometerX() > 7){
+			output.add(Movement.MOVE_BACKWARDS);
+		}	
+		if(inputData.isJoystickDown()){
+			output.add(Movement.LOOK_DOWN);
+		}
+		else if(inputData.isJoystickUp()){
+			output.add(Movement.LOOK_UP);
+		}
+		if(inputData.isJoystickLeft()){
+			output.add(Movement.LOOK_LEFT);
+		}
+		else if(inputData.isJoystickRight()){
+			output.add(Movement.LOOK_RIGHT);
+		}
 		return output;
 	}
 

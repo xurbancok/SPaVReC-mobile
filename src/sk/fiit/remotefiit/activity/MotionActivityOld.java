@@ -17,7 +17,6 @@ import sk.fiit.remotefiit.obj.PositionData;
 import com.example.remotefiit.R;
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.hardware.*;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -33,7 +32,7 @@ import android.widget.Toast;
 public class MotionActivityOld extends Activity implements SensorEventListener{
 
 	private SensorManager mSensorManager;
-	private Sensor gyroscope, accelerometer, proximity, orientation, magneticField;
+	private Sensor gyroscope, accelerometer, proximity, orientation, magneticField, linearAcceleration;
 //	private String outProximity = "0.0";
 //	private String[] outAccelerometer = new String[3];
 //	private String[] outGyroscope = new String[3];
@@ -74,12 +73,14 @@ public class MotionActivityOld extends Activity implements SensorEventListener{
 		proximity = mSensorManager.getSensorList(Sensor.TYPE_PROXIMITY).get(0);
 		orientation = mSensorManager.getSensorList(Sensor.TYPE_ORIENTATION).get(0);
 		magneticField = mSensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD).get(0);
+		linearAcceleration = mSensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION).get(0);
 		
-		mSensorManager.registerListener(this, gyroscope, SensorManager.SENSOR_DELAY_NORMAL);
+		//mSensorManager.registerListener(this, gyroscope, SensorManager.SENSOR_DELAY_NORMAL);
 		mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-		mSensorManager.registerListener(this, proximity, SensorManager.SENSOR_DELAY_NORMAL);
-		mSensorManager.registerListener(this, orientation, SensorManager.SENSOR_DELAY_NORMAL);
-		mSensorManager.registerListener(this, magneticField, SensorManager.SENSOR_DELAY_NORMAL);
+		//mSensorManager.registerListener(this, proximity, SensorManager.SENSOR_DELAY_NORMAL);
+		//mSensorManager.registerListener(this, orientation, SensorManager.SENSOR_DELAY_NORMAL);
+		//mSensorManager.registerListener(this, magneticField, SensorManager.SENSOR_DELAY_NORMAL);
+		mSensorManager.registerListener(this, linearAcceleration, SensorManager.SENSOR_DELAY_NORMAL);	
 		
 		proxi = (TextView) findViewById(R.id.editText1);
 		gyro = (TextView) findViewById(R.id.editText2);
@@ -169,8 +170,12 @@ public class MotionActivityOld extends Activity implements SensorEventListener{
 			outMagneticField[0] = String.format("%.2f%n", event.values[0]).replace("\n", "").replace(",", ".");
 			outMagneticField[1] = String.format("%.2f%n", event.values[1]).replace("\n", "").replace(",", ".");
 			outMagneticField[2] = String.format("%.2f%n", event.values[2]).replace("\n", "").replace(",", ".");
-
 */
+			break;
+		case (Sensor.TYPE_LINEAR_ACCELERATION):
+			positionData.setLinearAccelerationX(event.values[0]);
+			positionData.setLinearAccelerationY(event.values[1]);
+			positionData.setLinearAccelerationZ(event.values[2]);
 			break;
 		}
 		try {
@@ -218,8 +223,8 @@ public class MotionActivityOld extends Activity implements SensorEventListener{
 */
 		acce.setText("Accelerometer:\nX: " + positionData.getAccelerometerX() + "\nY: "
 				+ positionData.getAccelerometerY() + "\nZ: " + positionData.getAccelerometerZ());
-		gyro.setText("Gyroscope:\nX: " + positionData.getGyroscopeX() + "\nY: "
-				+ positionData.getGyroscopeY() + "\nZ: " +positionData.getGyroscopeZ());
+		gyro.setText("Linear acc:\nX: " + positionData.getLinearAccelerationX() + "\nY: "
+				+ positionData.getLinearAccelerationY() + "\nZ: " +positionData.getLinearAccelerationZ());
 		proxi.setText("Proximity: " + positionData.getProximity());
 		orient.setText("Orientation:\nX: " + positionData.getOrientationX() + "\nY: "
 				+ positionData.getOrientationY() + "\nZ: " + positionData.getOrientationZ());

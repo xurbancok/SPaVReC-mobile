@@ -8,5 +8,10 @@ import sk.fiit.remotefiit.obj.PositionData;
 public interface DataTransformation {
 	
 	ArrayList<Movement> rawData(PositionData inputData, boolean extendedFunction, boolean reset);
+
+	ArrayList<Movement> pedestrianData(PositionData inputData);
 	
+	ArrayList<Movement> helicopterData(PositionData inputData);
+	
+	ArrayList<Movement> carData(PositionData inputData);
 }

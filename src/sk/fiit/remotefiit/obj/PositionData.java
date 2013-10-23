@@ -24,6 +24,11 @@ public class PositionData {
 	
 	private double proximity;
 
+	private boolean joystickLeft = false;
+	private boolean joystickRight = false;
+	private boolean joystickUp = false;
+	private boolean joystickDown = false;
+	
 	public void setProximity(double proximity) {
 		this.proximity = roundTwoDecimals(proximity);
 	}
@@ -155,4 +160,44 @@ public class PositionData {
 	public void setLinearAccelerationZ(double linearAccelerationZ) {
 		this.linearAccelerationZ = roundTwoDecimals(linearAccelerationZ);
 	}
+
+	public boolean isJoystickRight() {
+		return joystickRight;
+	}
+
+	public void setJoystickRight(boolean joystickRight) {
+		this.joystickRight = joystickRight;
+	}
+
+	public boolean isJoystickLeft() {
+		return joystickLeft;
+	}
+
+	public void setJoystickLeft(boolean joystickLeft) {
+		this.joystickLeft = joystickLeft;
+	}
+
+	public boolean isJoystickUp() {
+		return joystickUp;
+	}
+
+	public void setJoystickUp(boolean joystickUp) {
+		this.joystickUp = joystickUp;
+	}
+
+	public boolean isJoystickDown() {
+		return joystickDown;
+	}
+
+	public void setJoystickDown(boolean joystickDown) {
+		this.joystickDown = joystickDown;
+	}
+	
+	public void resetJoystick(){
+		joystickLeft = false;
+		joystickRight = false;
+		joystickUp = false;
+		joystickDown = false;
+	}
+
 }
