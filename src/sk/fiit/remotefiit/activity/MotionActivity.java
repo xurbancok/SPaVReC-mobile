@@ -58,7 +58,7 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_motion);
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		//getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 		StrictMode.setThreadPolicy(policy);
 		
@@ -76,7 +76,8 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 		
 		xCoord = (TextView) findViewById(R.id.textView1);
 		yCoord = (TextView) findViewById(R.id.textView2);
-		zCoord = (TextView) findViewById(R.id.textView3);		
+		zCoord = (TextView) findViewById(R.id.textView3);	
+		zCoord.setText("");
 		joystickStred = (ImageView) findViewById(R.id.imageViewStred);
 		joystickZaklad = (ImageView) findViewById(R.id.imageViewZaklad);
 		buttonLeft = (ImageView) findViewById(R.id.imageViewButtonLeft);
@@ -88,6 +89,7 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 		proximity = mSensorManager.getSensorList(Sensor.TYPE_PROXIMITY).get(0);
 		orientation = mSensorManager.getSensorList(Sensor.TYPE_ORIENTATION).get(0);
 		magneticField = mSensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD).get(0);
+		linearAcceleration = mSensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION).get(0);
 	}
 
 	@Override
@@ -112,16 +114,20 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 					joystickStredLayoutParams = (RelativeLayout.LayoutParams) joystickStred.getLayoutParams();
 
 					if(isOut(touchX,touchY)){				//ak sme presli prstom mimo plochy joysticka
-						a = Math.abs(touchX-centerX);
-						b = Math.abs(touchY-centerY);
+						a = (touchX-centerX);
+						b = (touchY-centerY);
 						c = Math.sqrt(a*a+b*b);
 
-						x1 = (Math.cos(Math.asin(b/c))*radius);
-						y1 = (radius*b/c);
-						
-						x1 = (touchX>centerX ? (centerX+x1) : (centerX-x1));
-						y1 = (touchY>centerY ? (centerY+y1) : (centerY-y1));
+						x1 = ((a/c)*radius)+centerX;
+						y1 = ((b/c)*radius)+centerY;
+//						x1 = (Math.cos(Math.asin(b/c))*radius);
+//						y1 = (radius*b/c);
+//						
+//						x1 = (touchX>centerX ? (centerX+x1) : (centerX-x1));
+//						y1 = (touchY>centerY ? (centerY+y1) : (centerY-y1));
 
+						
+						
 						joystickStredLayoutParams.leftMargin = (int) Math.round(x1)- (joystickStred.getWidth()/2);
 						joystickStredLayoutParams.topMargin = (int) Math.round(y1)- (joystickStred.getHeight()/2);
 						joystickStred.setLayoutParams(joystickStredLayoutParams);
@@ -137,22 +143,32 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 						//ak drzim prst na joysticku a beham po celej ploche, tak zostanu nastavene vsetky premenne
 						//a potom pri spracovani dat urci zle pohyb, lebo je tam if...else if
 						positionData.setJoystickLeft(false);
-						xCoord.setText("vpravo");
+						xCoord.setText("");
 					}
 					else if(joystickStredLayoutParams.leftMargin+(joystickStred.getWidth()/2)<=joystickCenterX-30){
 						positionData.setJoystickLeft(true);
 						positionData.setJoystickRight(false);
-						xCoord.setText("vlavo");
+						xCoord.setText("");
 					}
 					if(joystickStredLayoutParams.topMargin+(joystickStred.getHeight()/2)>=joystickCenterY+30){
 						positionData.setJoystickDown(true);
 						positionData.setJoystickUp(false);
-						yCoord.setText("dole");
+						yCoord.setText("");
 					}
 					else if(joystickStredLayoutParams.topMargin+(joystickStred.getHeight()/2)<=joystickCenterY-30){
 						positionData.setJoystickUp(true);
 						positionData.setJoystickDown(false);
-						yCoord.setText("hore");
+						yCoord.setText("");
+					}
+					if(joystickStredLayoutParams.topMargin+(joystickStred.getHeight()/2)<joystickCenterY+30 
+							&& joystickStredLayoutParams.topMargin+(joystickStred.getHeight()/2)>joystickCenterY-30){
+						positionData.setJoystickUp(false);
+						positionData.setJoystickDown(false);
+					}
+					if(joystickStredLayoutParams.leftMargin+(joystickStred.getWidth()/2)<joystickCenterX+30
+							&& joystickStredLayoutParams.leftMargin+(joystickStred.getWidth()/2)>joystickCenterX-30){
+						positionData.setJoystickLeft(false);
+						positionData.setJoystickRight(false);
 					}
 					
 					break;
@@ -174,9 +190,11 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 				if (event.getAction() == MotionEvent.ACTION_DOWN){
 					buttonLeft.setImageResource(R.drawable.button_left_down);
 					Toast.makeText(getApplicationContext(), "lavy gombik", Toast.LENGTH_SHORT).show();
+					positionData.setVerticalMovement(-1);
 				}
 				else if (event.getAction() == MotionEvent.ACTION_UP){
 					buttonLeft.setImageResource(R.drawable.button_left);
+					positionData.setVerticalMovement(0);
 				}
 				return true;
 			}
@@ -188,9 +206,11 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 				if (event.getAction() == MotionEvent.ACTION_DOWN){
 					buttonRight.setImageResource(R.drawable.button_right_down);
 					Toast.makeText(getApplicationContext(), "pravy gombik", Toast.LENGTH_SHORT).show();
+					positionData.setVerticalMovement(1);
 				}
 				else if (event.getAction() == MotionEvent.ACTION_UP){
-					buttonRight.setImageResource(R.drawable.button_right);		
+					buttonRight.setImageResource(R.drawable.button_right);
+					positionData.setVerticalMovement(0);
 				}
 				return true;
 			}

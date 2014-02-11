@@ -4,15 +4,6 @@
     android:layout_height="match_parent"
     android:background="@color/main_menu_background" >
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:onClick="startMotion"
-        android:text="Start (temp)" />
-
     <ImageButton
         android:id="@+id/imageButtonPedestrian"
         android:layout_width="125dp"
@@ -55,16 +46,6 @@
         android:onClick="onClickSettings"
         android:background="@drawable/settings_icon" />
 
-    <TextView
-        android:id="@+id/textViewServerInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_alignLeft="@+id/imageButtonCar"
-        android:layout_marginBottom="13dp"
-        android:text="@string/server_settings"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <ImageView
         android:id="@+id/imageViewIcon"
         android:layout_width="30dp"
@@ -72,5 +53,24 @@
         android:layout_alignBottom="@+id/textViewServerInfo"
         android:layout_alignRight="@+id/imageButtonSettings"
         android:background="@drawable/kriz" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:onClick="startMotion"
+        android:text="Start (temp)" />
+
+    <TextView
+        android:id="@+id/textViewServerInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageButtonCar"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:text="@string/server_settings"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

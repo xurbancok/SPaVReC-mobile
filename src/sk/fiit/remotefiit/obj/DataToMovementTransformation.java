@@ -81,19 +81,46 @@ public class DataToMovementTransformation implements DataTransformation{
 	@Override
 	public ArrayList<Movement> pedestrianData(PositionData inputData) {
 		ArrayList<Movement> output = new ArrayList<Movement>();
-		
-		if(inputData.getAccelerometerY() < 3){
+		if(inputData.getAccelerometerY() < 4 && inputData.getAccelerometerY() >= 3){
+			output.add(Movement.MOVE_FORWARDS_2);
+		}
+		else if(inputData.getAccelerometerY() < 3 && inputData.getAccelerometerY() >= 2){
+			output.add(Movement.MOVE_FORWARDS_1);
+		}
+		else if(inputData.getAccelerometerY() < 2){
 			output.add(Movement.MOVE_FORWARDS);
 		}
-		else if(inputData.getAccelerometerY() > 7){
+		else if(inputData.getAccelerometerY() > 7 && inputData.getAccelerometerY() <= 8){
+			output.add(Movement.MOVE_BACKWARDS_2);
+		}
+		else if(inputData.getAccelerometerY() > 8 && inputData.getAccelerometerY() <= 9){
+			output.add(Movement.MOVE_BACKWARDS_1);
+		}
+		else if(inputData.getAccelerometerY() > 9){
 			output.add(Movement.MOVE_BACKWARDS);
 		}
-		if(inputData.getAccelerometerX() > 3){
+
+		
+		if(inputData.getAccelerometerX() > 3 && inputData.getAccelerometerX() <= 4.5){
+			output.add(Movement.MOVE_LEFT_2);
+		}
+		else if(inputData.getAccelerometerX() > 4.5 && inputData.getAccelerometerX() <= 6){
+			output.add(Movement.MOVE_LEFT_1);
+		}	
+		else if(inputData.getAccelerometerX() > 6){
 			output.add(Movement.MOVE_LEFT);
 		}
-		else if(inputData.getAccelerometerX() < -3){
+		else if(inputData.getAccelerometerX() < -3 && inputData.getAccelerometerX() >= -4.5){
+			output.add(Movement.MOVE_RIGHT_2);
+		}
+		else if(inputData.getAccelerometerX() < -4.5 && inputData.getAccelerometerX() >= -6){
+			output.add(Movement.MOVE_RIGHT_1);
+		}
+		else if(inputData.getAccelerometerX() < -6){
 			output.add(Movement.MOVE_RIGHT);
 		}	
+
+		
 		if(inputData.isJoystickDown()){
 			output.add(Movement.LOOK_DOWN);
 		}
@@ -113,18 +140,45 @@ public class DataToMovementTransformation implements DataTransformation{
 	public ArrayList<Movement> helicopterData(PositionData inputData) {
 		ArrayList<Movement> output = new ArrayList<Movement>();
 		
-		if(inputData.getAccelerometerY() < 3){
+		if(inputData.getAccelerometerY() < 4 && inputData.getAccelerometerY() >= 3){
+			output.add(Movement.MOVE_FORWARDS_2);
+		}
+		else if(inputData.getAccelerometerY() < 3 && inputData.getAccelerometerY() >= 2){
+			output.add(Movement.MOVE_FORWARDS_1);
+		}
+		else if(inputData.getAccelerometerY() < 2){
 			output.add(Movement.MOVE_FORWARDS);
 		}
-		else if(inputData.getAccelerometerY() > 7){
+		else if(inputData.getAccelerometerY() > 7 && inputData.getAccelerometerY() <= 8){
+			output.add(Movement.MOVE_BACKWARDS_2);
+		}
+		else if(inputData.getAccelerometerY() > 8 && inputData.getAccelerometerY() <= 9){
+			output.add(Movement.MOVE_BACKWARDS_1);
+		}
+		else if(inputData.getAccelerometerY() > 9){
 			output.add(Movement.MOVE_BACKWARDS);
 		}
-		if(inputData.getAccelerometerX() > 3){
+
+		
+		if(inputData.getAccelerometerX() > 3 && inputData.getAccelerometerX() <= 4.5){
+			output.add(Movement.MOVE_LEFT_2);
+		}
+		else if(inputData.getAccelerometerX() > 4.5 && inputData.getAccelerometerX() <= 6){
+			output.add(Movement.MOVE_LEFT_1);
+		}	
+		else if(inputData.getAccelerometerX() > 6){
 			output.add(Movement.MOVE_LEFT);
 		}
-		else if(inputData.getAccelerometerX() < -3){
+		else if(inputData.getAccelerometerX() < -3 && inputData.getAccelerometerX() >= -4.5){
+			output.add(Movement.MOVE_RIGHT_2);
+		}
+		else if(inputData.getAccelerometerX() < -4.5 && inputData.getAccelerometerX() >= -6){
+			output.add(Movement.MOVE_RIGHT_1);
+		}
+		else if(inputData.getAccelerometerX() < -6){
 			output.add(Movement.MOVE_RIGHT);
-		}	
+		}
+		
 		if(inputData.isJoystickDown()){
 			output.add(Movement.LOOK_DOWN);
 		}
@@ -137,6 +191,13 @@ public class DataToMovementTransformation implements DataTransformation{
 		else if(inputData.isJoystickRight()){
 			output.add(Movement.LOOK_RIGHT);
 		}
+		if(inputData.getVerticalMovement() == 1){
+			output.add(Movement.MOVE_UP);
+		}else if(inputData.getVerticalMovement() == -1){
+			output.add(Movement.MOVE_DOWN);
+		}
+		
+		
 		return output;
 
 	}
@@ -145,18 +206,45 @@ public class DataToMovementTransformation implements DataTransformation{
 	public ArrayList<Movement> carData(PositionData inputData) {
 		ArrayList<Movement> output = new ArrayList<Movement>();
 		
-		if(inputData.getAccelerometerY() < -1.5){
-			output.add(Movement.LOOK_LEFT);
+		if(inputData.getAccelerometerX() < 4 && inputData.getAccelerometerX() >= 3){
+			output.add(Movement.MOVE_FORWARDS_2);
 		}
-		else if(inputData.getAccelerometerY() > 1.5){
-			output.add(Movement.LOOK_RIGHT);
+		else if(inputData.getAccelerometerX() < 3 && inputData.getAccelerometerX() >= 2){
+			output.add(Movement.MOVE_FORWARDS_1);
 		}
-		if(inputData.getAccelerometerX() < 4){
+		else if(inputData.getAccelerometerX() < 2){
 			output.add(Movement.MOVE_FORWARDS);
 		}
-		else if(inputData.getAccelerometerX() > 7){
+		else if(inputData.getAccelerometerX() > 7 && inputData.getAccelerometerX() <= 8){
+			output.add(Movement.MOVE_BACKWARDS_2);
+		}
+		else if(inputData.getAccelerometerX() > 8 && inputData.getAccelerometerX() <= 9){
+			output.add(Movement.MOVE_BACKWARDS_1);
+		}
+		else if(inputData.getAccelerometerX() > 9){
 			output.add(Movement.MOVE_BACKWARDS);
+		}
+
+		if(inputData.getAccelerometerY() < -1.5 && inputData.getAccelerometerY() >= -2.5){
+			output.add(Movement.LOOK_LEFT_2);
+		}
+		else if(inputData.getAccelerometerY() < -2.5 && inputData.getAccelerometerY() >= -3.5){
+			output.add(Movement.LOOK_LEFT_1);
 		}	
+		else if(inputData.getAccelerometerY() < -3.5){
+			output.add(Movement.LOOK_LEFT);
+		}
+		else if(inputData.getAccelerometerY() > 1.5 && inputData.getAccelerometerY() <= 2.5){
+			output.add(Movement.LOOK_RIGHT_2);
+		}
+		else if(inputData.getAccelerometerY() > 2.5 && inputData.getAccelerometerY() <= 3.5){
+			output.add(Movement.LOOK_RIGHT_1);
+		}
+		else if(inputData.getAccelerometerY() > 3.5){
+			output.add(Movement.LOOK_RIGHT);
+		}
+		
+
 		if(inputData.isJoystickDown()){
 			output.add(Movement.LOOK_DOWN);
 		}

@@ -26,6 +26,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		//odstrani notifikacnu listu
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		//findViewById(R.id.button1).setVisibility(View.GONE);
 	}
 	
 	public void startMotion(View view){

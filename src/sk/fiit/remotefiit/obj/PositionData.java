@@ -29,6 +29,9 @@ public class PositionData {
 	private boolean joystickUp = false;
 	private boolean joystickDown = false;
 	
+	private int verticalMovement = 0;
+	private boolean reset = true;
+	
 	public void setProximity(double proximity) {
 		this.proximity = roundTwoDecimals(proximity);
 	}
@@ -167,6 +170,7 @@ public class PositionData {
 
 	public void setJoystickRight(boolean joystickRight) {
 		this.joystickRight = joystickRight;
+		this.setReset(false);
 	}
 
 	public boolean isJoystickLeft() {
@@ -175,6 +179,7 @@ public class PositionData {
 
 	public void setJoystickLeft(boolean joystickLeft) {
 		this.joystickLeft = joystickLeft;
+		this.setReset(false);
 	}
 
 	public boolean isJoystickUp() {
@@ -183,6 +188,7 @@ public class PositionData {
 
 	public void setJoystickUp(boolean joystickUp) {
 		this.joystickUp = joystickUp;
+		this.setReset(false);
 	}
 
 	public boolean isJoystickDown() {
@@ -191,13 +197,31 @@ public class PositionData {
 
 	public void setJoystickDown(boolean joystickDown) {
 		this.joystickDown = joystickDown;
+		this.setReset(false);
 	}
-	
+
 	public void resetJoystick(){
 		joystickLeft = false;
 		joystickRight = false;
 		joystickUp = false;
 		joystickDown = false;
+		this.setReset(true);
+	}
+
+	public int getVerticalMovement() {
+		return verticalMovement;
+	}
+
+	public void setVerticalMovement(int verticalMovement) {
+		this.verticalMovement = verticalMovement;
+	}
+
+	public boolean isReset() {
+		return reset;
+	}
+
+	public void setReset(boolean reset) {
+		this.reset = reset;
 	}
 
 }

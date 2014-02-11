@@ -31,7 +31,7 @@ public final class R {
     }
     public static final class id {
         public static final int AbsoluteLayout1=0x7f08000e;
-        public static final int button1=0x7f080000;
+        public static final int button1=0x7f080006;
         public static final int buttonCancel=0x7f080017;
         public static final int buttonFunction=0x7f080013;
         public static final int buttonOk=0x7f080018;
@@ -40,14 +40,14 @@ public final class R {
         public static final int editText2=0x7f080010;
         public static final int editText3=0x7f08000f;
         public static final int editText4=0x7f080012;
-        public static final int imageButtonCar=0x7f080003;
-        public static final int imageButtonHelicopter=0x7f080002;
-        public static final int imageButtonPedestrian=0x7f080001;
+        public static final int imageButtonCar=0x7f080002;
+        public static final int imageButtonHelicopter=0x7f080001;
+        public static final int imageButtonPedestrian=0x7f080000;
         public static final int imageButtonQr=0x7f080015;
-        public static final int imageButtonSettings=0x7f080004;
+        public static final int imageButtonSettings=0x7f080003;
         public static final int imageViewButtonLeft=0x7f08000b;
         public static final int imageViewButtonRight=0x7f08000c;
-        public static final int imageViewIcon=0x7f080006;
+        public static final int imageViewIcon=0x7f080004;
         public static final int imageViewStred=0x7f08000d;
         public static final int imageViewZaklad=0x7f08000a;
         public static final int linearLayout1=0x7f080016;

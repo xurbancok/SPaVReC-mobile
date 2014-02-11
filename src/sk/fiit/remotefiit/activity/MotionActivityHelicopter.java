@@ -19,6 +19,12 @@ public class MotionActivityHelicopter extends MotionActivity{
 	Handler timerHandler = new Handler();
 	Runnable timerRunnable;
 	final private int sendingTime = 100;
+	private Float[] gravity = {0f,0f,0f};
+	private Float[] linear_acceleration = {0f,0f,0f};
+	private long time = 0;
+	private int timeDelay = 500; //500milisekund
+	private float windowFilter = 3.0f;
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
@@ -76,14 +82,47 @@ public class MotionActivityHelicopter extends MotionActivity{
 			positionData.setAccelerometerX(event.values[0]);
 			positionData.setAccelerometerY(event.values[1]);
 			positionData.setAccelerometerZ(event.values[2]);
+			
+			//high-pass filter pre akcelerometer data. vysledok je cca rovnaky ako
+			//pri senzore linearneho zrychlenia
+//		    final float alpha = 0.8f;
+//		    gravity[0] = alpha * gravity[0] + (1 - alpha) * event.values[0];
+//	        gravity[1] = alpha * gravity[1] + (1 - alpha) * event.values[1];
+//	        gravity[2] = alpha * gravity[2] + (1 - alpha) * event.values[2];
+//
+//	        linear_acceleration[0] = event.values[0] - gravity[0];
+//	        linear_acceleration[1] = event.values[1] - gravity[1];
+//	        linear_acceleration[2] = event.values[2] - gravity[2];
+//	        Log.d("SENZOR","acc0 " +event.values[0]+" "+event.values[1]+" "+event.values[2]);
+//	        Log.d("SENZOR","acc1 " +linear_acceleration[0]+" "+linear_acceleration[1]+" "+linear_acceleration[2]);
 			break;
+/*
 		case (Sensor.TYPE_LINEAR_ACCELERATION):
 			positionData.setLinearAccelerationX(event.values[0]);
 			positionData.setLinearAccelerationY(event.values[1]);
 			positionData.setLinearAccelerationZ(event.values[2]);
+			
+			if(event.values[2]<-windowFilter){
+				//ideme dole
+				Log.d("SENZOR", "rozdiel: "+ (System.currentTimeMillis()-time));
+				if((System.currentTimeMillis()-time)>timeDelay){
+					positionData.setVerticalMovement((positionData.getVerticalMovement()==1)? 0 : -1);
+					//Log.d("SENZOR", "ideme dole");
+					time = System.currentTimeMillis();
+				}
+			}else if(event.values[2]>windowFilter){
+				//ideme hore
+				Log.d("SENZOR", "rozdiel: "+ (System.currentTimeMillis()-time));
+				if(System.currentTimeMillis()-time>timeDelay){	
+					positionData.setVerticalMovement((positionData.getVerticalMovement()==-1)? 0 : 1);
+					//Log.d("SENZOR", "ideme hore");
+					time = System.currentTimeMillis();
+				}
+			}
+			
 			break;
+			*/
 		}
-		
 	}
 
 	@Override
