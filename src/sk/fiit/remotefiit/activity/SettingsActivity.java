@@ -11,8 +11,12 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -30,6 +34,8 @@ public class SettingsActivity extends Activity implements SensorEventListener{
 	private FileStorage fs = new FileStorage();
 	private double valueLeft, valueRight, valueForwards, valueBackwards;
 	
+	private Button defaultButton;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -43,9 +49,7 @@ public class SettingsActivity extends Activity implements SensorEventListener{
         valueForwards = CalibrationData.getTiltForwards();
         valueLeft =CalibrationData.getTiltLeft();
         valueRight = CalibrationData.getTiltRight();  
-		
-		
-		ImageViewUp = (ImageView)findViewById(R.id.imageViewUp);
+        		ImageViewUp = (ImageView)findViewById(R.id.imageViewUp);
 		ImageViewLeft = (ImageView)findViewById(R.id.imageViewLeft);
 		ImageViewLeft2 = (ImageView)findViewById(R.id.imageViewLeft2);
 		ImageViewRight = (ImageView)findViewById(R.id.imageViewRight);
@@ -57,6 +61,28 @@ public class SettingsActivity extends Activity implements SensorEventListener{
 		seekBarUp = (SeekBar)findViewById(R.id.seekBarUp);
 		seekBarDown = (SeekBar)findViewById(R.id.seekBarDown);
 		textViewValues = (TextView)findViewById(R.id.textViewValues);
+		
+		textViewValues.setText("Left: "+roundTwoDecimals(valueLeft)+"\nRight: "+roundTwoDecimals(Math.abs(valueRight))+"\nUp: "+roundTwoDecimals(Math.abs((valueForwards-5.0)))+"\nDown: "+Math.abs(roundTwoDecimals(valueBackwards-5.0)));
+
+		defaultButton = (Button)findViewById(R.id.buttonDefault);
+		defaultButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				//TODO:	
+				valueBackwards = 4;
+				valueForwards = -1;
+				valueLeft = 3;
+				valueRight = -3;
+				
+				seekBarLeft.setProgress(100-((int)(valueLeft*10)));
+				seekBarRight.setProgress(-((int)(valueRight*10)));
+				seekBarUp.setProgress(40);
+				seekBarDown.setProgress(100-(((int)valueBackwards-5)*10));
+				
+				Toast.makeText(getApplicationContext(), "Default settings has been applied",Toast.LENGTH_SHORT).show();
+			}
+		});
 		
 		seekBarLeft.setProgress(100-((int)(CalibrationData.getTiltLeft()*10)));
 		seekBarRight.setProgress(-((int)(CalibrationData.getTiltRight()*10)));

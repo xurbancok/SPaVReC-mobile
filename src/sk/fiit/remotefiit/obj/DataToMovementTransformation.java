@@ -2,6 +2,8 @@ package sk.fiit.remotefiit.obj;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 import sk.fiit.remotefiit.emun.Movement;
 import sk.fiit.remotefiit.interfaces.DataTransformation;
 
@@ -81,6 +83,20 @@ public class DataToMovementTransformation implements DataTransformation{
 	@Override
 	public ArrayList<Movement> pedestrianData(PositionData inputData) {
 		ArrayList<Movement> output = new ArrayList<Movement>();
+		
+		if(inputData.getAccelerometerY() < CalibrationData.getTiltForwards()){
+			output.add(Movement.MOVE_FORWARDS);
+		}
+		else if(inputData.getAccelerometerY() > CalibrationData.getTiltBackwards()){
+			output.add(Movement.MOVE_BACKWARDS);
+		}
+		if(inputData.getAccelerometerX() > CalibrationData.getTiltLeft()){
+			output.add(Movement.MOVE_LEFT);
+		}
+		else if(inputData.getAccelerometerX() < CalibrationData.getTiltRight()){
+			output.add(Movement.MOVE_RIGHT);
+		}
+/*
 		if(inputData.getAccelerometerY() < 4 && inputData.getAccelerometerY() >= 3){
 			output.add(Movement.MOVE_FORWARDS_2);
 		}
@@ -119,7 +135,7 @@ public class DataToMovementTransformation implements DataTransformation{
 		else if(inputData.getAccelerometerX() < -6){
 			output.add(Movement.MOVE_RIGHT);
 		}	
-
+*/
 		
 		if(inputData.isJoystickDown()){
 			output.add(Movement.LOOK_DOWN);
@@ -140,6 +156,20 @@ public class DataToMovementTransformation implements DataTransformation{
 	public ArrayList<Movement> helicopterData(PositionData inputData) {
 		ArrayList<Movement> output = new ArrayList<Movement>();
 		
+		if(inputData.getAccelerometerY() < CalibrationData.getTiltForwards()){
+			output.add(Movement.MOVE_FORWARDS);
+		}
+		else if(inputData.getAccelerometerY() > CalibrationData.getTiltBackwards()){
+			output.add(Movement.MOVE_BACKWARDS);
+		}
+		if(inputData.getAccelerometerX() > CalibrationData.getTiltLeft()){
+			output.add(Movement.MOVE_LEFT);
+		}
+		else if(inputData.getAccelerometerX() < CalibrationData.getTiltRight()){
+			output.add(Movement.MOVE_RIGHT);
+		}
+		
+/*
 		if(inputData.getAccelerometerY() < 4 && inputData.getAccelerometerY() >= 3){
 			output.add(Movement.MOVE_FORWARDS_2);
 		}
@@ -178,6 +208,8 @@ public class DataToMovementTransformation implements DataTransformation{
 		else if(inputData.getAccelerometerX() < -6){
 			output.add(Movement.MOVE_RIGHT);
 		}
+*/
+		
 		
 		if(inputData.isJoystickDown()){
 			output.add(Movement.LOOK_DOWN);
@@ -206,6 +238,21 @@ public class DataToMovementTransformation implements DataTransformation{
 	public ArrayList<Movement> carData(PositionData inputData) {
 		ArrayList<Movement> output = new ArrayList<Movement>();
 		
+		//pri vertikalnej polohe su znamienka vlavo a vpravo naopak 
+		if(inputData.getAccelerometerY() < -CalibrationData.getTiltLeft()){
+			output.add(Movement.LOOK_LEFT);
+		}
+		else if(inputData.getAccelerometerY() > -CalibrationData.getTiltRight()){
+			output.add(Movement.LOOK_RIGHT);
+		}
+		if(inputData.getAccelerometerX() < CalibrationData.getTiltForwards()){
+			output.add(Movement.MOVE_FORWARDS);
+		}
+		else if(inputData.getAccelerometerX() > CalibrationData.getTiltBackwards()){
+			output.add(Movement.MOVE_BACKWARDS);
+		}	
+
+/*
 		if(inputData.getAccelerometerX() < 4 && inputData.getAccelerometerX() >= 3){
 			output.add(Movement.MOVE_FORWARDS_2);
 		}
@@ -244,7 +291,7 @@ public class DataToMovementTransformation implements DataTransformation{
 			output.add(Movement.LOOK_RIGHT);
 		}
 		
-
+*/
 		if(inputData.isJoystickDown()){
 			output.add(Movement.LOOK_DOWN);
 		}

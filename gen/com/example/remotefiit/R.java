@@ -46,9 +46,10 @@ public final class R {
     public static final class id {
         public static final int AbsoluteLayout1=0x7f08000e;
         public static final int button1=0x7f080006;
-        public static final int buttonCancel=0x7f080023;
+        public static final int buttonCancel=0x7f080024;
+        public static final int buttonDefault=0x7f080021;
         public static final int buttonFunction=0x7f080013;
-        public static final int buttonOk=0x7f080024;
+        public static final int buttonOk=0x7f080025;
         public static final int buttonReset=0x7f080014;
         public static final int editText1=0x7f080011;
         public static final int editText2=0x7f080010;
@@ -57,7 +58,7 @@ public final class R {
         public static final int imageButtonCar=0x7f080002;
         public static final int imageButtonHelicopter=0x7f080001;
         public static final int imageButtonPedestrian=0x7f080000;
-        public static final int imageButtonQr=0x7f080021;
+        public static final int imageButtonQr=0x7f080022;
         public static final int imageButtonSettings=0x7f080003;
         public static final int imageViewButtonLeft=0x7f08000b;
         public static final int imageViewButtonRight=0x7f08000c;
@@ -70,8 +71,8 @@ public final class R {
         public static final int imageViewStred=0x7f08000d;
         public static final int imageViewUp=0x7f08001c;
         public static final int imageViewZaklad=0x7f08000a;
-        public static final int linearLayout1=0x7f080022;
-        public static final int menu_settings=0x7f080025;
+        public static final int linearLayout1=0x7f080023;
+        public static final int menu_settings=0x7f080026;
         public static final int pokus=0x7f080015;
         public static final int seekBarDown=0x7f080018;
         public static final int seekBarLeft=0x7f080017;

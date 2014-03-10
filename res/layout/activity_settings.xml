@@ -95,7 +95,15 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/seekBarDown"
-        android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/buttonDefault"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/textViewValues"
+        android:layout_alignRight="@+id/seekBarRight"
+        android:layout_below="@+id/seekBarDown"
+        android:text="Default" />
 
 </RelativeLayout>
