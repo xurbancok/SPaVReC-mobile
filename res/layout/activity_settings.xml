@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pokus"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_menu_background"
+    android:orientation="vertical" >
+
+    <SeekBar
+        android:id="@+id/seekBarRight"
+        android:layout_width="170dp"
+        android:max="100"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_centerVertical="true"
+        android:progressDrawable="@drawable/seek_bar_custom" />
+
+    <SeekBar
+        android:id="@+id/seekBarLeft"
+        android:layout_width="170dp"
+        android:max="100"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:progressDrawable="@drawable/seek_bar_custom_reverse" />
+
+    <sk.fiit.remotefiit.obj.VerticalSeekBar
+        android:id="@+id/seekBarDown"
+        android:layout_width="wrap_content"
+        android:max="100"
+        android:layout_height="170dp"
+        android:layout_marginTop="-10dp"
+        android:layout_below="@+id/seekBarRight"
+        android:layout_centerHorizontal="true"
+        android:progressDrawable="@drawable/seek_bar_custom_reverse" />
+
+    <sk.fiit.remotefiit.obj.VerticalSeekBar
+        android:id="@+id/seekBarUp"
+        android:layout_width="wrap_content"
+        android:layout_height="170dp"
+        android:max="100"
+        android:layout_above="@+id/seekBarRight"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-10dp"
+        android:progressDrawable="@drawable/seek_bar_custom" />
+
+    <ImageView
+        android:id="@+id/imageViewLeft2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+		android:layout_above="@id/seekBarLeft"
+		android:layout_toLeftOf="@id/seekBarDown" />
+
+    <ImageView
+        android:id="@+id/imageViewLeft"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+		android:layout_below="@id/seekBarLeft"
+		android:layout_toLeftOf="@id/seekBarUp" />
+
+    <ImageView
+        android:id="@+id/imageViewUp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/seekBarUp"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/imageViewDown"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/seekBarDown"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/imageViewRight"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+		android:layout_below="@id/seekBarRight"
+		android:layout_toRightOf="@id/seekBarDown" />
+
+    <ImageView
+        android:id="@+id/imageViewRight2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+		android:layout_above="@id/seekBarRight"
+		android:layout_toRightOf="@id/seekBarDown" />
+
+    <TextView
+        android:id="@+id/textViewValues"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/seekBarDown"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

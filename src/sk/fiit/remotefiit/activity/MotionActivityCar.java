@@ -19,6 +19,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.remotefiit.R;
 
@@ -33,6 +34,18 @@ public class MotionActivityCar extends MotionActivity{
 		super.onCreate(savedInstanceState);
 		findViewById(R.id.imageViewButtonLeft).setVisibility(View.GONE);
 		findViewById(R.id.imageViewButtonRight).setVisibility(View.GONE);
+		
+		if(mSensorManager == null){
+			Toast.makeText(getApplicationContext(), "Error: Sensor Manager is missing", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}else if(accelerometer==null){
+			Toast.makeText(getApplicationContext(), "Error: Accelerometer is missing", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}
+		
+		
 		senzorRegistering();
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
@@ -76,13 +89,24 @@ public class MotionActivityCar extends MotionActivity{
 
 	@Override
 	protected void senzorRegistering() {
-		mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+		if(accelerometer!=null && mSensorManager!=null)mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 	}
 	
 	@Override
 	protected void onResume(){
 		super.onResume();
-		mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+		
+		if(mSensorManager == null){
+			Toast.makeText(getApplicationContext(), "Error: Sensor Manager is missing", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}else if(accelerometer==null){
+			Toast.makeText(getApplicationContext(), "Error: Accelerometer is missing", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}
+		
+		if(accelerometer!=null && mSensorManager!=null)mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 		timerHandler.postDelayed(timerRunnable, 0);
 	}
 
@@ -104,37 +128,4 @@ public class MotionActivityCar extends MotionActivity{
         mSensorManager.unregisterListener(this);
         timerHandler.removeCallbacks(timerRunnable);
     }
-	private float readUsage() {
-	    try {
-	        RandomAccessFile reader = new RandomAccessFile("/proc/stat", "r");
-	        String load = reader.readLine();
-
-	        String[] toks = load.split(" ");
-
-	        long idle1 = Long.parseLong(toks[5]);
-	        long cpu1 = Long.parseLong(toks[2]) + Long.parseLong(toks[3]) + Long.parseLong(toks[4])
-	              + Long.parseLong(toks[6]) + Long.parseLong(toks[7]) + Long.parseLong(toks[8]);
-
-	        try {
-	            Thread.sleep(360);
-	        } catch (Exception e) {}
-
-	        reader.seek(0);
-	        load = reader.readLine();
-	        reader.close();
-
-	        toks = load.split(" ");
-
-	        long idle2 = Long.parseLong(toks[5]);
-	        long cpu2 = Long.parseLong(toks[2]) + Long.parseLong(toks[3]) + Long.parseLong(toks[4])
-	            + Long.parseLong(toks[6]) + Long.parseLong(toks[7]) + Long.parseLong(toks[8]);
-
-	        return (float)(cpu2 - cpu1) / ((cpu2 + idle2) - (cpu1 + idle1));
-
-	    } catch (IOException ex) {
-	        ex.printStackTrace();
-	    }
-
-	    return 0;
-	} 
 }

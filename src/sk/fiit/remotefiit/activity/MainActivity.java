@@ -1,5 +1,6 @@
 package sk.fiit.remotefiit.activity;
 
+import sk.fiit.remotefiit.obj.CalibrationData;
 import sk.fiit.remotefiit.obj.SettingsDialog;
 
 import com.example.remotefiit.R;
@@ -27,6 +28,9 @@ public class MainActivity extends Activity {
 		//odstrani notifikacnu listu
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		//findViewById(R.id.button1).setVisibility(View.GONE);
+		
+		//kalibracne udaje sa nahraju zo suboru do globalnej premennej 
+		CalibrationData.initializeValue();
 	}
 	
 	public void startMotion(View view){
@@ -54,8 +58,10 @@ public class MainActivity extends Activity {
 	}
 	
 	public void onClickSettings(View view){
-		settingsDialog = new SettingsDialog(MainActivity.this, hostAdress, this);
-		settingsDialog.show();
+		//settingsDialog = new SettingsDialog(MainActivity.this, hostAdress, this);
+		//settingsDialog.show();
+		Intent i = new Intent(getApplicationContext(),SettingsActivity.class);
+		startActivity(i);
 	}
 	
 	public void setHost(String input){
@@ -66,7 +72,7 @@ public class MainActivity extends Activity {
 	public void startMotionPedestrian(View view){
 		if(hostAdress==null || hostAdress.length()==0)hostAdress="123.123.123.123:1234";
 		String[] host = hostAdress.split(":");
-		Toast.makeText(this, "Pedestrian", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "Pedestrian", Toast.LENGTH_SHORT).show();
 		Intent i = new Intent(getApplicationContext(),MotionActivityPedestrian.class);
 		i.putExtra("IP", host[0]);
 		i.putExtra("port", host[1]);
@@ -75,7 +81,7 @@ public class MainActivity extends Activity {
 	public void startMotionHelicopter(View view){
 		if(hostAdress==null || hostAdress.length()==0)hostAdress="123.123.123.123:1234";
 		String[] host = hostAdress.split(":");
-		Toast.makeText(this, "Helicopter", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "Helicopter", Toast.LENGTH_SHORT).show();
 		Intent i = new Intent(getApplicationContext(),MotionActivityHelicopter.class);
 		i.putExtra("IP", host[0]);
 		i.putExtra("port", host[1]);
@@ -84,7 +90,7 @@ public class MainActivity extends Activity {
 	public void startMotionCar(View view){
 		if(hostAdress==null || hostAdress.length()==0)hostAdress="123.123.123.123:1234";
 		String[] host = hostAdress.split(":");
-		Toast.makeText(this, "Car", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "Car", Toast.LENGTH_SHORT).show();
 		Intent i = new Intent(getApplicationContext(),MotionActivityCar.class);
 		i.putExtra("IP", host[0]);
 		i.putExtra("port", host[1]);

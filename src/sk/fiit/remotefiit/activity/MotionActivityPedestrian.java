@@ -23,6 +23,7 @@ import android.os.Debug;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 public class MotionActivityPedestrian extends MotionActivity{
 	
@@ -39,6 +40,18 @@ public class MotionActivityPedestrian extends MotionActivity{
 		super.onCreate(savedInstanceState);
 		findViewById(R.id.imageViewButtonLeft).setVisibility(View.GONE);
 		findViewById(R.id.imageViewButtonRight).setVisibility(View.GONE);
+		
+		if(mSensorManager == null){
+			Toast.makeText(getApplicationContext(), "Error: Sensor Manager is missing", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}else if(accelerometer==null){
+			Toast.makeText(getApplicationContext(), "Error: Accelerometer is missing", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}
+		
+		
 		senzorRegistering();
 		timerRunnable = new Runnable() {
 			@Override
@@ -60,14 +73,25 @@ public class MotionActivityPedestrian extends MotionActivity{
 	
 	@Override
 	protected void senzorRegistering() {
-		mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+		if(accelerometer!=null && mSensorManager!=null)mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 		//mSensorManager.registerListener(this, gyroscope, SensorManager.SENSOR_DELAY_NORMAL);
 	}
 	
 	@Override
 	protected void onResume(){
 		super.onResume();
-		mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+		
+		if(mSensorManager == null){
+			Toast.makeText(getApplicationContext(), "Error: Sensor Manager is missing", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}else if(accelerometer==null){
+			Toast.makeText(getApplicationContext(), "Error: Accelerometer is missing", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}
+		
+		if(accelerometer!=null && mSensorManager!=null)mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 		//mSensorManager.registerListener(this, gyroscope, SensorManager.SENSOR_DELAY_NORMAL);
 		timerHandler.postDelayed(timerRunnable, 0);
 	}

@@ -68,17 +68,17 @@ public class MotionActivityOld extends Activity implements SensorEventListener{
 		}
 
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-		accelerometer = mSensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER).get(0);
-		gyroscope = mSensorManager.getSensorList(Sensor.TYPE_GYROSCOPE).get(0);
-		proximity = mSensorManager.getSensorList(Sensor.TYPE_PROXIMITY).get(0);
-		orientation = mSensorManager.getSensorList(Sensor.TYPE_ORIENTATION).get(0);
-		magneticField = mSensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD).get(0);
-		linearAcceleration = mSensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION).get(0);
+		if(mSensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER)!=null)accelerometer = mSensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER).get(0);
+		if(mSensorManager.getSensorList(Sensor.TYPE_GRAVITY)!=null)gyroscope = mSensorManager.getSensorList(Sensor.TYPE_GRAVITY).get(0);
+		if(mSensorManager.getSensorList(Sensor.TYPE_PROXIMITY)!=null)proximity = mSensorManager.getSensorList(Sensor.TYPE_PROXIMITY).get(0);
+		if(mSensorManager.getSensorList(Sensor.TYPE_ORIENTATION)!=null)orientation = mSensorManager.getSensorList(Sensor.TYPE_ORIENTATION).get(0);
+		if(mSensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD)!=null)magneticField = mSensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD).get(0);
+		if(mSensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION)!=null)linearAcceleration = mSensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION).get(0);
 		
-		//mSensorManager.registerListener(this, gyroscope, SensorManager.SENSOR_DELAY_NORMAL);
+		mSensorManager.registerListener(this, gyroscope, SensorManager.SENSOR_DELAY_NORMAL);
 		mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-		//mSensorManager.registerListener(this, proximity, SensorManager.SENSOR_DELAY_NORMAL);
-		//mSensorManager.registerListener(this, orientation, SensorManager.SENSOR_DELAY_NORMAL);
+		mSensorManager.registerListener(this, proximity, SensorManager.SENSOR_DELAY_NORMAL);
+		mSensorManager.registerListener(this, orientation, SensorManager.SENSOR_DELAY_NORMAL);
 		//mSensorManager.registerListener(this, magneticField, SensorManager.SENSOR_DELAY_NORMAL);
 		mSensorManager.registerListener(this, linearAcceleration, SensorManager.SENSOR_DELAY_NORMAL);	
 		
@@ -112,7 +112,7 @@ public class MotionActivityOld extends Activity implements SensorEventListener{
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		switch (event.sensor.getType()) {
-		case (Sensor.TYPE_GYROSCOPE):
+		case (Sensor.TYPE_GRAVITY):
 			// Log.d("VR", "-------------GYRO-------------");
 			positionData.setGyroscopeX(event.values[0]);
 			positionData.setGyroscopeY(event.values[1]);
@@ -223,8 +223,8 @@ public class MotionActivityOld extends Activity implements SensorEventListener{
 */
 		acce.setText("Accelerometer:\nX: " + positionData.getAccelerometerX() + "\nY: "
 				+ positionData.getAccelerometerY() + "\nZ: " + positionData.getAccelerometerZ());
-		gyro.setText("Linear acc:\nX: " + positionData.getLinearAccelerationX() + "\nY: "
-				+ positionData.getLinearAccelerationY() + "\nZ: " +positionData.getLinearAccelerationZ());
+		gyro.setText("Gyroscope:\nX: " + positionData.getGyroscopeX() + "\nY: "
+				+ positionData.getGyroscopeY() + "\nZ: " +positionData.getGyroscopeZ());
 		proxi.setText("Proximity: " + positionData.getProximity());
 		orient.setText("Orientation:\nX: " + positionData.getOrientationX() + "\nY: "
 				+ positionData.getOrientationY() + "\nZ: " + positionData.getOrientationZ());

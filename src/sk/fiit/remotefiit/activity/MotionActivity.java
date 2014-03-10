@@ -77,19 +77,25 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 		xCoord = (TextView) findViewById(R.id.textView1);
 		yCoord = (TextView) findViewById(R.id.textView2);
 		zCoord = (TextView) findViewById(R.id.textView3);	
+		xCoord.setText("");
+		yCoord.setText("");
 		zCoord.setText("");
+		
 		joystickStred = (ImageView) findViewById(R.id.imageViewStred);
 		joystickZaklad = (ImageView) findViewById(R.id.imageViewZaklad);
 		buttonLeft = (ImageView) findViewById(R.id.imageViewButtonLeft);
 		buttonRight = (ImageView) findViewById(R.id.imageViewButtonRight);
 
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-		accelerometer = mSensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER).get(0);
-		gyroscope = mSensorManager.getSensorList(Sensor.TYPE_GYROSCOPE).get(0);
-		proximity = mSensorManager.getSensorList(Sensor.TYPE_PROXIMITY).get(0);
-		orientation = mSensorManager.getSensorList(Sensor.TYPE_ORIENTATION).get(0);
-		magneticField = mSensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD).get(0);
-		linearAcceleration = mSensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION).get(0);
+		if(mSensorManager != null){
+			if(mSensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER)!=null)accelerometer = mSensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER).get(0);
+		    if(mSensorManager.getSensorList(Sensor.TYPE_GYROSCOPE)!=null)gyroscope = mSensorManager.getSensorList(Sensor.TYPE_GYROSCOPE).get(0);
+		    if(mSensorManager.getSensorList(Sensor.TYPE_PROXIMITY)!=null)proximity = mSensorManager.getSensorList(Sensor.TYPE_PROXIMITY).get(0);
+		    if(mSensorManager.getSensorList(Sensor.TYPE_ORIENTATION)!=null)orientation = mSensorManager.getSensorList(Sensor.TYPE_ORIENTATION).get(0);
+		    if(mSensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD)!=null)magneticField = mSensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD).get(0);
+		    if(mSensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION)!=null)linearAcceleration = mSensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION).get(0);
+		}
+
 	}
 
 	@Override
@@ -138,35 +144,31 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 						joystickStred.setLayoutParams(joystickStredLayoutParams);
 					}
 					
-					if(joystickStredLayoutParams.leftMargin+(joystickStred.getWidth()/2)>=joystickCenterX+30){
+					if(joystickStredLayoutParams.leftMargin+(joystickStred.getWidth()/2)>=joystickCenterX+60){
 						positionData.setJoystickRight(true);
 						//ak drzim prst na joysticku a beham po celej ploche, tak zostanu nastavene vsetky premenne
 						//a potom pri spracovani dat urci zle pohyb, lebo je tam if...else if
 						positionData.setJoystickLeft(false);
-						xCoord.setText("");
 					}
-					else if(joystickStredLayoutParams.leftMargin+(joystickStred.getWidth()/2)<=joystickCenterX-30){
+					else if(joystickStredLayoutParams.leftMargin+(joystickStred.getWidth()/2)<=joystickCenterX-60){
 						positionData.setJoystickLeft(true);
 						positionData.setJoystickRight(false);
-						xCoord.setText("");
 					}
-					if(joystickStredLayoutParams.topMargin+(joystickStred.getHeight()/2)>=joystickCenterY+30){
+					if(joystickStredLayoutParams.topMargin+(joystickStred.getHeight()/2)>=joystickCenterY+60){
 						positionData.setJoystickDown(true);
 						positionData.setJoystickUp(false);
-						yCoord.setText("");
 					}
-					else if(joystickStredLayoutParams.topMargin+(joystickStred.getHeight()/2)<=joystickCenterY-30){
+					else if(joystickStredLayoutParams.topMargin+(joystickStred.getHeight()/2)<=joystickCenterY-60){
 						positionData.setJoystickUp(true);
 						positionData.setJoystickDown(false);
-						yCoord.setText("");
 					}
-					if(joystickStredLayoutParams.topMargin+(joystickStred.getHeight()/2)<joystickCenterY+30 
-							&& joystickStredLayoutParams.topMargin+(joystickStred.getHeight()/2)>joystickCenterY-30){
+					if(joystickStredLayoutParams.topMargin+(joystickStred.getHeight()/2)<joystickCenterY+60 
+							&& joystickStredLayoutParams.topMargin+(joystickStred.getHeight()/2)>joystickCenterY-60){
 						positionData.setJoystickUp(false);
 						positionData.setJoystickDown(false);
 					}
-					if(joystickStredLayoutParams.leftMargin+(joystickStred.getWidth()/2)<joystickCenterX+30
-							&& joystickStredLayoutParams.leftMargin+(joystickStred.getWidth()/2)>joystickCenterX-30){
+					if(joystickStredLayoutParams.leftMargin+(joystickStred.getWidth()/2)<joystickCenterX+60
+							&& joystickStredLayoutParams.leftMargin+(joystickStred.getWidth()/2)>joystickCenterX-60){
 						positionData.setJoystickLeft(false);
 						positionData.setJoystickRight(false);
 					}
@@ -175,7 +177,6 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 				case MotionEvent.ACTION_UP:
 					MotionActivity.this.centerJoystick();
 					positionData.resetJoystick();
-					xCoord.setText("");	yCoord.setText("");
 					break;
 				default:
 					break;
@@ -189,7 +190,7 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN){
 					buttonLeft.setImageResource(R.drawable.button_left_down);
-					Toast.makeText(getApplicationContext(), "lavy gombik", Toast.LENGTH_SHORT).show();
+					//Toast.makeText(getApplicationContext(), "lavy gombik", Toast.LENGTH_SHORT).show();
 					positionData.setVerticalMovement(-1);
 				}
 				else if (event.getAction() == MotionEvent.ACTION_UP){
@@ -205,7 +206,7 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN){
 					buttonRight.setImageResource(R.drawable.button_right_down);
-					Toast.makeText(getApplicationContext(), "pravy gombik", Toast.LENGTH_SHORT).show();
+					//Toast.makeText(getApplicationContext(), "pravy gombik", Toast.LENGTH_SHORT).show();
 					positionData.setVerticalMovement(1);
 				}
 				else if (event.getAction() == MotionEvent.ACTION_UP){

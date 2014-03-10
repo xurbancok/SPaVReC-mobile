@@ -11,6 +11,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 import sk.fiit.remotefiit.emun.Movement;
 import sk.fiit.remotefiit.obj.PositionData;
 
@@ -29,6 +30,17 @@ public class MotionActivityHelicopter extends MotionActivity{
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+				
+		if(mSensorManager == null){
+			Toast.makeText(getApplicationContext(), "Error: Sensor Manager is missing", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}else if(accelerometer==null){
+			Toast.makeText(getApplicationContext(), "Error: Accelerometer is missing", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}		
+		
 		senzorRegistering();
 		timerRunnable = new Runnable() {
 			@Override
@@ -63,15 +75,26 @@ public class MotionActivityHelicopter extends MotionActivity{
 	
 	@Override
 	protected void senzorRegistering() {
-		mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-		mSensorManager.registerListener(this, linearAcceleration, SensorManager.SENSOR_DELAY_NORMAL);
+		if(accelerometer!=null && mSensorManager!=null)mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+		//if(linearAcceleration!=null && mSensorManager!=null)mSensorManager.registerListener(this, linearAcceleration, SensorManager.SENSOR_DELAY_NORMAL);
 	}	
 	
 	@Override
 	protected void onResume(){
 		super.onResume();
-		mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-		mSensorManager.registerListener(this, linearAcceleration, SensorManager.SENSOR_DELAY_NORMAL);
+		
+		if(mSensorManager == null){
+			Toast.makeText(getApplicationContext(), "Error: Sensor Manager is missing", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}else if(accelerometer==null){
+			Toast.makeText(getApplicationContext(), "Error: Accelerometer is missing", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}
+		
+		if(accelerometer!=null && mSensorManager!=null)mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+		//if(linearAcceleration!=null && mSensorManager!=null)mSensorManager.registerListener(this, linearAcceleration, SensorManager.SENSOR_DELAY_NORMAL);
 		timerHandler.postDelayed(timerRunnable, 0);
 	}
 
