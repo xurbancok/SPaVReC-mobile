@@ -34,12 +34,14 @@ public class MainActivity extends Activity {
 	}
 	
 	public void startMotion(View view){
-		if(hostAdress==null || hostAdress.length()==0)hostAdress="123.123.123.123:1234";
-		String[] host = hostAdress.split(":");
-		Intent motion = new Intent(getApplicationContext(),MotionActivityOld.class);
-		motion.putExtra("IP", host[0]);
-		motion.putExtra("port", host[1]);
-		startActivity(motion);
+//		if(hostAdress==null || hostAdress.length()==0)hostAdress="123.123.123.123:1234";
+//		String[] host = hostAdress.split(":");
+//		Intent motion = new Intent(getApplicationContext(),MotionActivityOld.class);
+//		motion.putExtra("IP", host[0]);
+//		motion.putExtra("port", host[1]);
+//		startActivity(motion);
+		settingsDialog = new SettingsDialog(MainActivity.this, hostAdress, this);
+		settingsDialog.show();
 	}
 
 	@Override

@@ -89,11 +89,11 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		if(mSensorManager != null){
 			if(mSensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER)!=null)accelerometer = mSensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER).get(0);
-		    if(mSensorManager.getSensorList(Sensor.TYPE_GYROSCOPE)!=null)gyroscope = mSensorManager.getSensorList(Sensor.TYPE_GYROSCOPE).get(0);
-		    if(mSensorManager.getSensorList(Sensor.TYPE_PROXIMITY)!=null)proximity = mSensorManager.getSensorList(Sensor.TYPE_PROXIMITY).get(0);
-		    if(mSensorManager.getSensorList(Sensor.TYPE_ORIENTATION)!=null)orientation = mSensorManager.getSensorList(Sensor.TYPE_ORIENTATION).get(0);
-		    if(mSensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD)!=null)magneticField = mSensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD).get(0);
-		    if(mSensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION)!=null)linearAcceleration = mSensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION).get(0);
+			if((mSensorManager.getSensorList(Sensor.TYPE_GYROSCOPE)!=null) && (mSensorManager.getSensorList(Sensor.TYPE_GYROSCOPE).size()>0)) gyroscope = mSensorManager.getSensorList(Sensor.TYPE_GYROSCOPE).get(0);
+			if((mSensorManager.getSensorList(Sensor.TYPE_PROXIMITY)!=null) && (mSensorManager.getSensorList(Sensor.TYPE_PROXIMITY).size()>0))proximity = mSensorManager.getSensorList(Sensor.TYPE_PROXIMITY).get(0);
+		    if((mSensorManager.getSensorList(Sensor.TYPE_ORIENTATION)!=null) && (mSensorManager.getSensorList(Sensor.TYPE_ORIENTATION).size()>0))orientation = mSensorManager.getSensorList(Sensor.TYPE_ORIENTATION).get(0);
+		    if((mSensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD)!=null) && (mSensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD).size()>0))magneticField = mSensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD).get(0);
+		    if((mSensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION)!=null) && (mSensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION).size()>0))linearAcceleration = mSensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION).get(0);
 		}
 
 	}

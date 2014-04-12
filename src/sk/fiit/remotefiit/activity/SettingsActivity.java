@@ -1,4 +1,5 @@
 package sk.fiit.remotefiit.activity;
+import sk.fiit.remotefiit.interfaces.DataStorage;
 import sk.fiit.remotefiit.obj.CalibrationData;
 import sk.fiit.remotefiit.obj.FileStorage;
 import com.example.remotefiit.R;
@@ -31,7 +32,7 @@ public class SettingsActivity extends Activity implements SensorEventListener{
 	private SeekBar seekBarLeft, seekBarRight, seekBarUp, seekBarDown;
 	
 	private TextView textViewValues;
-	private FileStorage fs = new FileStorage();
+	private DataStorage fs = new FileStorage();
 	private double valueLeft, valueRight, valueForwards, valueBackwards;
 	
 	private Button defaultButton;
@@ -69,7 +70,6 @@ public class SettingsActivity extends Activity implements SensorEventListener{
 			
 			@Override
 			public void onClick(View v) {
-				//TODO:	
 				valueBackwards = 4;
 				valueForwards = -1;
 				valueLeft = 3;
