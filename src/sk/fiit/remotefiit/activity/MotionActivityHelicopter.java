@@ -5,14 +5,20 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.util.ArrayList;
 
+import com.example.remotefiit.R;
+
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import sk.fiit.remotefiit.emun.Movement;
+import sk.fiit.remotefiit.obj.CalibrationData;
 import sk.fiit.remotefiit.obj.PositionData;
 
 public class MotionActivityHelicopter extends MotionActivity{
@@ -26,11 +32,24 @@ public class MotionActivityHelicopter extends MotionActivity{
 	private int timeDelay = 500; //500milisekund
 	private float windowFilter = 3.0f;
 	
+	private double xRange;
+	private double yRange;
+	
+	private RelativeLayout.LayoutParams pauseStredLayoutParam;
+
+	private int pauseX;
+	private int pauseY;
+	private int volnost;
+	private double dielX, dielY;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-				
+		
+		RelativeLayout.LayoutParams pauseStredLayoutParam = (RelativeLayout.LayoutParams) pauseZaklad.getLayoutParams();
+		pauseStredLayoutParam.addRule(RelativeLayout.CENTER_HORIZONTAL);
+		pauseZaklad.setLayoutParams(pauseStredLayoutParam);
+		
 		if(mSensorManager == null){
 			Toast.makeText(getApplicationContext(), "Error: Sensor Manager is missing", Toast.LENGTH_SHORT).show();
 			finish();
@@ -54,7 +73,35 @@ public class MotionActivityHelicopter extends MotionActivity{
 				timerHandler.postDelayed(this, sendingTime);
 				}
 			};
+			
+			pauseStred.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if(Integer.parseInt(pauseStred.getTag().toString())==R.drawable.pause){
+						pauseStred.setImageResource(R.drawable.play);
+						pauseStred.setTag(R.drawable.play);
+						centerPauseButton();
+				        MotionActivityHelicopter.this.onPause();
+						Toast.makeText(getApplicationContext(), "Data capture pause", Toast.LENGTH_SHORT).show();
+					}else{
+						pauseStred.setImageResource(R.drawable.pause);
+						pauseStred.setTag(R.drawable.pause);
+						MotionActivityHelicopter.this.onResume();
+						Toast.makeText(getApplicationContext(),  "Data capture start", Toast.LENGTH_SHORT).show();
+					}
+				}
+			});
+			
 	}
+	
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		pauseX = pauseZaklad.getLeft()+(pauseZaklad.getHeight()/2)-(pauseStred.getHeight()/2);
+		pauseY = pauseStred.getTop();
+		volnost = pauseZaklad.getHeight()-pauseStred.getHeight();
+	}
+	
 	
 	@Override
 	protected void dataProcessing(PositionData positionData) throws IOException{
@@ -106,6 +153,15 @@ public class MotionActivityHelicopter extends MotionActivity{
 			positionData.setAccelerometerY(event.values[1]);
 			positionData.setAccelerometerZ(event.values[2]);
 			
+			xRange = Math.abs(CalibrationData.getTiltLeft())+Math.abs(CalibrationData.getTiltRight());
+			yRange = CalibrationData.getTiltBackwards()-CalibrationData.getTiltForwards();
+			dielX = volnost/xRange;
+			dielY = volnost/yRange;
+			
+			pauseStredLayoutParam = (RelativeLayout.LayoutParams) pauseStred.getLayoutParams();
+			pauseStredLayoutParam.leftMargin = (int) (pauseX + (dielX*event.values[0])+xRange);
+			pauseStredLayoutParam.topMargin = (int) (pauseY - (dielY*((event.values[1])-(yRange))));
+			pauseStred.setLayoutParams(pauseStredLayoutParam);
 			//high-pass filter pre akcelerometer data. vysledok je cca rovnaky ako
 			//pri senzore linearneho zrychlenia
 //		    final float alpha = 0.8f;

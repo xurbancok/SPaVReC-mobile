@@ -11,7 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="30dp"
         android:onClick="startMotionPedestrian"
         android:background="@drawable/pedestrian_icon" />
 
@@ -21,7 +21,7 @@
         android:layout_height="125dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
         android:onClick="startMotionHelicopter"
         android:background="@drawable/helicopter_icon" />
@@ -41,7 +41,7 @@
         android:layout_width="125dp"
         android:layout_height="125dp"
         android:layout_alignLeft="@+id/imageButtonHelicopter"
-        android:layout_below="@+id/imageButtonHelicopter"
+        android:layout_below="@+id/imageButtonCar"
         android:layout_marginTop="30dp"
         android:onClick="onClickSettings"
         android:background="@drawable/settings_icon" />
@@ -73,4 +73,17 @@
         android:text="@string/server_settings"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+<ImageButton
+        android:id="@+id/imageButtonWifi"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_alignLeft="@+id/imageButtonPedestrian"
+        android:layout_below="@+id/imageButtonCar"
+        android:layout_marginTop="30dp"
+        android:onClick="startConnectionSettings"
+        android:background="@drawable/wifi_icon" />
+    
+    
+    
+    
 </RelativeLayout>

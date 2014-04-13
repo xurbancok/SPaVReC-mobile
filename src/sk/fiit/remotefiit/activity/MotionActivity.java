@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
@@ -38,6 +39,10 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 	protected int centerY;
 	protected ImageView joystickStred;
 	protected ImageView joystickZaklad;
+	
+	protected ImageView pauseStred;
+	protected ImageView pauseZaklad;
+	
 	protected ImageView buttonLeft;
 	protected ImageView buttonRight;	
 
@@ -83,6 +88,11 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 		
 		joystickStred = (ImageView) findViewById(R.id.imageViewStred);
 		joystickZaklad = (ImageView) findViewById(R.id.imageViewZaklad);
+		
+		pauseStred = (ImageView) findViewById(R.id.imageViewPause);
+		pauseStred.setTag(R.drawable.pause);
+		pauseZaklad = (ImageView) findViewById(R.id.imageViewPauseZaklad);
+		
 		buttonLeft = (ImageView) findViewById(R.id.imageViewButtonLeft);
 		buttonRight = (ImageView) findViewById(R.id.imageViewButtonRight);
 
@@ -101,6 +111,7 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		MotionActivity.this.centerJoystick();
+		MotionActivity.this.centerPauseButton();
 		MotionActivity.this.setButtons();
 		
 		joystickStred.setOnTouchListener(new OnTouchListener() {
@@ -216,9 +227,16 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 				return true;
 			}
 		});
-		
 	}
 	
+	protected void centerPauseButton() {
+		//centrovanie pause tlacidla
+		RelativeLayout.LayoutParams pauseStredLayoutParam = (RelativeLayout.LayoutParams) pauseStred.getLayoutParams();
+		pauseStredLayoutParam.leftMargin = pauseZaklad.getLeft()+(pauseZaklad.getHeight()/2)-(pauseStred.getHeight()/2);
+		pauseStredLayoutParam.topMargin = pauseZaklad.getTop()+(pauseZaklad.getWidth()/2)-(pauseStred.getWidth()/2);
+		pauseStred.setLayoutParams(pauseStredLayoutParam);		
+	}
+
 	//nastavi sa "p·Ëka" joysticku na stred
 	public void centerJoystick(){
 		RelativeLayout.LayoutParams joystickStredLayoutParam = (RelativeLayout.LayoutParams) joystickStred.getLayoutParams();

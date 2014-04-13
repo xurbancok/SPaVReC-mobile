@@ -31,6 +31,11 @@ public class FileStorage implements DataStorage {
 					CalibrationData.setTiltForwards(jObject.getDouble("tiltForwards"));		
 					CalibrationData.setTiltLeft(jObject.getDouble("tiltLeft"));
 					CalibrationData.setTiltRight(jObject.getDouble("tiltRight"));
+					
+					CalibrationData.setTiltBackwardsCount(jObject.getInt("tiltBackwardsCount"));
+					CalibrationData.setTiltForwardsCount(jObject.getInt("tiltForwardsCount"));		
+					CalibrationData.setTiltLeftCount(jObject.getInt("tiltLeftCount"));
+					CalibrationData.setTiltRightCount(jObject.getInt("tiltRightCount"));					
 				}catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -42,12 +47,17 @@ public class FileStorage implements DataStorage {
 			CalibrationData.setTiltForwards(-1);		
 			CalibrationData.setTiltLeft(3);
 			CalibrationData.setTiltRight(-3);
+			CalibrationData.setTiltBackwardsCount(1);
+			CalibrationData.setTiltForwardsCount(1);		
+			CalibrationData.setTiltLeftCount(1);
+			CalibrationData.setTiltRightCount(1);
 		}
 
 	}
 
 	@Override
-	public void storeData(double tiltForwards, double tiltBackwards, double tiltLeft, double tiltRight) {
+	public void storeData(double tiltForwards, double tiltBackwards, double tiltLeft, double tiltRight,
+			int tiltForwardsCount, int tiltBackwardsCount, int tiltLeftCount, int tiltRightCount) {
 		File root = Environment.getExternalStorageDirectory();
 		File dir = new File(root, "/FiitRemote/");
 		dir.mkdirs(); 
@@ -59,6 +69,11 @@ public class FileStorage implements DataStorage {
 		        	result.put("tiltForwards", tiltForwards);
 		        	result.put("tiltLeft", tiltLeft);
 		        	result.put("tiltRight",tiltRight);
+		        	
+		        	result.put("tiltBackwardsCount", tiltBackwardsCount);
+		        	result.put("tiltForwardsCount", tiltForwardsCount);
+		        	result.put("tiltLeftCount", tiltLeftCount);
+		        	result.put("tiltRightCount",tiltRightCount);
 		        	
 		        	FileWriter filewriter = new FileWriter(file);
 		            BufferedWriter out = new BufferedWriter(filewriter);

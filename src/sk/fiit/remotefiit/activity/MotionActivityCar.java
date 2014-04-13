@@ -7,6 +7,7 @@ import java.net.DatagramSocket;
 import java.util.ArrayList;
 
 import sk.fiit.remotefiit.emun.Movement;
+import sk.fiit.remotefiit.obj.CalibrationData;
 import sk.fiit.remotefiit.obj.PositionData;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
@@ -18,6 +19,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -28,6 +30,16 @@ public class MotionActivityCar extends MotionActivity{
 	Handler timerHandler = new Handler();
 	Runnable timerRunnable;
 	final private int sendingTime = 100;
+	
+	private double xRange;
+	private double yRange;
+	
+	private RelativeLayout.LayoutParams pauseStredLayoutParam;
+
+	private int pauseX;
+	private int pauseY;
+	private int volnost;
+	private double dielX, dielY;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +67,12 @@ public class MotionActivityCar extends MotionActivity{
 		joystickStredLayoutParam.bottomMargin=0;
 		joystickZaklad.setLayoutParams(joystickStredLayoutParam);
 		
+		pauseStredLayoutParam = (RelativeLayout.LayoutParams) pauseZaklad.getLayoutParams();
+		pauseStredLayoutParam.leftMargin=0;
+		pauseZaklad.setLayoutParams(pauseStredLayoutParam);
+		
+		
+		
 		timerRunnable = new Runnable() {
 			@Override
 			public void run() {
@@ -67,8 +85,38 @@ public class MotionActivityCar extends MotionActivity{
 				timerHandler.postDelayed(this, sendingTime);
 				}
 			};
+			
+			pauseStred.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if(Integer.parseInt(pauseStred.getTag().toString())==R.drawable.pause){
+						pauseStred.setImageResource(R.drawable.play);
+						pauseStred.setTag(R.drawable.play);
+						centerPauseButton();
+//				       
+//						mSensorManager.unregisterListener(MotionActivityPedestrian.this);
+//				        timerHandler.removeCallbacks(timerRunnable);
+				        MotionActivityCar.this.onPause();
+						Toast.makeText(getApplicationContext(), "Data capture pause", Toast.LENGTH_SHORT).show();
+					}else{
+						pauseStred.setImageResource(R.drawable.pause);
+						pauseStred.setTag(R.drawable.pause);
+						MotionActivityCar.this.onResume();
+						Toast.makeText(getApplicationContext(),  "Data capture start", Toast.LENGTH_SHORT).show();
+					}
+				}
+			});
+			
 	}
 
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		pauseX = pauseZaklad.getLeft()+(pauseZaklad.getHeight()/2)-(pauseStred.getHeight()/2);
+		pauseY = pauseStred.getTop();
+		volnost = pauseZaklad.getHeight()-pauseStred.getHeight();
+	}
+	
 	@Override
 	protected void dataProcessing(PositionData positionData) throws IOException {
 		ArrayList<Movement> output = dataToMovementTransformation.carData(positionData);
@@ -117,6 +165,17 @@ public class MotionActivityCar extends MotionActivity{
 			positionData.setAccelerometerX(event.values[0]);
 			positionData.setAccelerometerY(event.values[1]);
 			positionData.setAccelerometerZ(event.values[2]);
+			
+			xRange = Math.abs(CalibrationData.getTiltLeft())+Math.abs(CalibrationData.getTiltRight());
+			yRange = CalibrationData.getTiltBackwards()-CalibrationData.getTiltForwards();
+			dielX = volnost/xRange;
+			dielY = volnost/yRange;
+		
+			pauseStredLayoutParam = (RelativeLayout.LayoutParams) pauseStred.getLayoutParams();
+			pauseStredLayoutParam.leftMargin = (int) (pauseX - (dielX*event.values[1])+xRange);
+			pauseStredLayoutParam.topMargin = (int) (pauseY - (dielY*((event.values[0])-(yRange))));
+			pauseStred.setLayoutParams(pauseStredLayoutParam);
+			
 			break;
 		}
 		

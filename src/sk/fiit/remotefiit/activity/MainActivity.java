@@ -1,6 +1,8 @@
 package sk.fiit.remotefiit.activity;
 
+import sk.fiit.remotefiit.emun.Movement;
 import sk.fiit.remotefiit.obj.CalibrationData;
+import sk.fiit.remotefiit.obj.CalibrationData.Tilting;
 import sk.fiit.remotefiit.obj.SettingsDialog;
 
 import com.example.remotefiit.R;
@@ -60,10 +62,14 @@ public class MainActivity extends Activity {
 	}
 	
 	public void onClickSettings(View view){
-		//settingsDialog = new SettingsDialog(MainActivity.this, hostAdress, this);
-		//settingsDialog.show();
-		Intent i = new Intent(getApplicationContext(),SettingsActivity.class);
+		//Intent i = new Intent(getApplicationContext(),SettingsActivity.class);
+		Intent i = new Intent(getApplicationContext(),CalibrationActivity.class);
+		i.putExtra("tilt", Tilting.TILT_LEFT.toString());
 		startActivity(i);
+	}
+	public void startConnectionSettings(View view){
+		settingsDialog = new SettingsDialog(MainActivity.this, hostAdress, this);
+		settingsDialog.show();
 	}
 	
 	public void setHost(String input){

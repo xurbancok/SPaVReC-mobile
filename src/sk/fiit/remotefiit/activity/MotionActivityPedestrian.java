@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sk.fiit.remotefiit.emun.Movement;
+import sk.fiit.remotefiit.interfaces.DataStorage;
+import sk.fiit.remotefiit.obj.CalibrationData;
+import sk.fiit.remotefiit.obj.FileStorage;
 import sk.fiit.remotefiit.obj.PositionData;
 import sk.fiit.remotefiit.obj.SystemUsage;
 
@@ -21,8 +24,11 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.Handler;
+import android.os.storage.StorageManager;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class MotionActivityPedestrian extends MotionActivity{
@@ -33,14 +39,30 @@ public class MotionActivityPedestrian extends MotionActivity{
 	private boolean isStill = true;
 	private final double stillWindow = (3*Math.PI)/180;	//15 stupnov je trashold, kedy predpokladame, ze zariadenie je v pokoji
 														//senzory vracaju v radianoch data
+	private DataStorage fs = new FileStorage();
 	//List<Long> cas = new ArrayList<Long>();
+	
+	private double xRange;
+	private double yRange;
+	
+	private RelativeLayout.LayoutParams pauseStredLayoutParam;
+
+	private int pauseX;
+	private int pauseY;
+	private int volnost;
+	private double dielX, dielY;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		findViewById(R.id.imageViewButtonLeft).setVisibility(View.GONE);
 		findViewById(R.id.imageViewButtonRight).setVisibility(View.GONE);
-		
+
+		pauseStredLayoutParam = (RelativeLayout.LayoutParams) pauseZaklad.getLayoutParams();
+		pauseStredLayoutParam.addRule(RelativeLayout.CENTER_HORIZONTAL);
+		pauseZaklad.setLayoutParams(pauseStredLayoutParam);
+
 		if(mSensorManager == null){
 			Toast.makeText(getApplicationContext(), "Error: Sensor Manager is missing", Toast.LENGTH_SHORT).show();
 			finish();
@@ -50,7 +72,6 @@ public class MotionActivityPedestrian extends MotionActivity{
 			finish();
 			return;
 		}
-		
 		
 		senzorRegistering();
 		timerRunnable = new Runnable() {
@@ -69,7 +90,38 @@ public class MotionActivityPedestrian extends MotionActivity{
 				timerHandler.postDelayed(this, sendingTime);
 				}
 			};
+
+			pauseStred.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if(Integer.parseInt(pauseStred.getTag().toString())==R.drawable.pause){
+						pauseStred.setImageResource(R.drawable.play);
+						pauseStred.setTag(R.drawable.play);
+						centerPauseButton();
+//				       
+//						mSensorManager.unregisterListener(MotionActivityPedestrian.this);
+//				        timerHandler.removeCallbacks(timerRunnable);
+				        MotionActivityPedestrian.this.onPause();
+						Toast.makeText(getApplicationContext(), "Data capture pause", Toast.LENGTH_SHORT).show();
+					}else{
+						pauseStred.setImageResource(R.drawable.pause);
+						pauseStred.setTag(R.drawable.pause);
+						MotionActivityPedestrian.this.onResume();
+						Toast.makeText(getApplicationContext(),  "Data capture start", Toast.LENGTH_SHORT).show();
+					}
+				}
+			});
+
 		}
+	
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		pauseX = pauseZaklad.getLeft()+(pauseZaklad.getHeight()/2)-(pauseStred.getHeight()/2);
+		pauseY = pauseStred.getTop();
+		volnost = pauseZaklad.getHeight()-pauseStred.getHeight();
+	}
+	
 	
 	@Override
 	protected void senzorRegistering() {
@@ -104,6 +156,17 @@ public class MotionActivityPedestrian extends MotionActivity{
 			positionData.setAccelerometerX(event.values[0]);
 			positionData.setAccelerometerY(event.values[1]);
 			positionData.setAccelerometerZ(event.values[2]);
+
+			xRange = Math.abs(CalibrationData.getTiltLeft())+Math.abs(CalibrationData.getTiltRight());
+			yRange = CalibrationData.getTiltBackwards()-CalibrationData.getTiltForwards();
+			dielX = volnost/xRange;
+			dielY = volnost/yRange;
+	
+			pauseStredLayoutParam = (RelativeLayout.LayoutParams) pauseStred.getLayoutParams();
+			pauseStredLayoutParam.leftMargin = (int) (pauseX + (dielX*event.values[0])+xRange);
+			pauseStredLayoutParam.topMargin = (int) (pauseY - (dielY*((event.values[1])-(yRange))));
+			pauseStred.setLayoutParams(pauseStredLayoutParam);
+
 			break;	
 		case (Sensor.TYPE_GYROSCOPE):
 			Log.d("SENZOR", Math.abs(event.values[0])+ Math.abs(event.values[1])+ Math.abs(event.values[2])+"");
@@ -136,5 +199,7 @@ public class MotionActivityPedestrian extends MotionActivity{
         super.onPause();
         mSensorManager.unregisterListener(this);
         timerHandler.removeCallbacks(timerRunnable);
+        fs.storeData(CalibrationData.getTiltForwards(), CalibrationData.getTiltBackwards(), CalibrationData.getTiltLeft(), CalibrationData.getTiltRight(), 
+				CalibrationData.getTiltForwardsCount(), CalibrationData.getTiltBackwardsCount(), CalibrationData.getTiltLeftCount(), CalibrationData.getTiltRightCount());
     }
 }

@@ -218,7 +218,7 @@ public class SettingsActivity extends Activity implements SensorEventListener{
 	protected void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this);
-        fs.storeData(valueForwards, valueBackwards, valueLeft, valueRight);
+        fs.storeData(valueForwards, valueBackwards, valueLeft, valueRight,1,1,1,1);//stara kalibracia, podla jednej hodnoty
         CalibrationData.setTiltBackwards(valueBackwards);
         CalibrationData.setTiltForwards(valueForwards);
         CalibrationData.setTiltLeft(valueLeft);

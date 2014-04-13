@@ -65,4 +65,18 @@
          android:layout_height="240dp"
          android:src="@drawable/joystick_stred" />
 
+     <ImageView
+         android:id="@+id/imageViewPauseZaklad"
+         android:layout_width="60dp"
+         android:layout_height="60dp"
+         android:layout_alignParentTop="true"
+
+         android:src="@drawable/pause_button_zaklad" />
+
+     <ImageView
+         android:id="@+id/imageViewPause"
+         android:layout_width="30dp"
+         android:layout_height="30dp"
+         android:src="@drawable/pause" />
+
 </RelativeLayout>
