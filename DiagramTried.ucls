@@ -1,283 +1,479 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.4" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+<class-diagram version="1.1.5" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
   realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
-  <interface id="1" language="java" name="sk.fiit.remotefiit.interfaces.DataTransformation" project="FiitRemote" 
-    file="/FiitRemote/src/sk/fiit/remotefiit/interfaces/DataTransformation.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-20" y="1210"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="2" language="java" name="sk.fiit.remotefiit.obj.JSONCreator" project="FiitRemote" 
-    file="/FiitRemote/src/sk/fiit/remotefiit/obj/JSONCreator.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-384" y="978"/>    
+  <class id="1" language="java" name="sk.fiit.remotefiit.obj.FileStorage" project="FiitRemote" 
+    file="/FiitRemote/src/sk/fiit/remotefiit/obj/FileStorage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="346" y="-9532"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="3" language="java" name="sk.fiit.remotefiit.emun.Movement" project="FiitRemote" 
+  <class id="2" language="java" name="sk.fiit.remotefiit.activity.CalibrationActivity" project="FiitRemote" 
+    file="/FiitRemote/src/sk/fiit/remotefiit/activity/CalibrationActivity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-13" y="-11035"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="sk.fiit.remotefiit.obj.JSONCreator" project="FiitRemote" 
+    file="/FiitRemote/src/sk/fiit/remotefiit/obj/JSONCreator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="828" y="-10891"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="4" language="java" name="sk.fiit.remotefiit.interfaces.DataStorage" project="FiitRemote" 
+    file="/FiitRemote/src/sk/fiit/remotefiit/interfaces/DataStorage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="664" y="-8850"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="5" language="java" name="sk.fiit.remotefiit.activity.MainActivity" project="FiitRemote" 
+    file="/FiitRemote/src/sk/fiit/remotefiit/activity/MainActivity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="301" y="-12033"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="sk.fiit.remotefiit.obj.DataToMovementTransformation" project="FiitRemote" 
+    file="/FiitRemote/src/sk/fiit/remotefiit/obj/DataToMovementTransformation.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1278" y="-10864"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="sk.fiit.remotefiit.obj.CalibrationData" project="FiitRemote" 
+    file="/FiitRemote/src/sk/fiit/remotefiit/obj/CalibrationData.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="332" y="-9978"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="sk.fiit.remotefiit.obj.SettingsDialog" project="FiitRemote" 
+    file="/FiitRemote/src/sk/fiit/remotefiit/obj/SettingsDialog.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-14" y="-12035"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="sk.fiit.remotefiit.activity.MotionActivityHelicopter" project="FiitRemote" 
+    file="/FiitRemote/src/sk/fiit/remotefiit/activity/MotionActivityHelicopter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="704" y="-11524"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="sk.fiit.remotefiit.activity.SettingsActivity" project="FiitRemote" 
+    file="/FiitRemote/src/sk/fiit/remotefiit/activity/SettingsActivity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="291" y="-11190"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="11" language="java" name="sk.fiit.remotefiit.interfaces.DataTransformation" project="FiitRemote" 
+    file="/FiitRemote/src/sk/fiit/remotefiit/interfaces/DataTransformation.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1198" y="-10409"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="12" language="java" name="sk.fiit.remotefiit.activity.MotionActivityCar" project="FiitRemote" 
+    file="/FiitRemote/src/sk/fiit/remotefiit/activity/MotionActivityCar.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="961" y="-11525"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="13" language="java" name="sk.fiit.remotefiit.emun.Movement" project="FiitRemote" 
     file="/FiitRemote/src/sk/fiit/remotefiit/emun/Movement.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-495" y="1144"/>    
+    <position height="-1" width="-1" x="846" y="-9861"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="4" language="java" name="sk.fiit.remotefiit.activity.MotionActivityCar" project="FiitRemote" 
-    file="/FiitRemote/src/sk/fiit/remotefiit/activity/MotionActivityCar.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="146" y="440"/>    
+  <enumeration id="14" language="java" name="sk.fiit.remotefiit.obj.CalibrationData.Tilting" project="FiitRemote" 
+    file="/FiitRemote/src/sk/fiit/remotefiit/obj/CalibrationData.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-5" y="-9989"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </class>  
-  <class id="5" language="java" name="sk.fiit.remotefiit.activity.MainActivity" project="FiitRemote" 
-    file="/FiitRemote/src/sk/fiit/remotefiit/activity/MainActivity.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-151" y="140"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="6" language="java" name="sk.fiit.remotefiit.obj.PositionData" project="FiitRemote" 
+  </enumeration>  
+  <class id="15" language="java" name="sk.fiit.remotefiit.obj.PositionData" project="FiitRemote" 
     file="/FiitRemote/src/sk/fiit/remotefiit/obj/PositionData.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="553" y="782"/>    
+    <position height="-1" width="-1" x="1290" y="-8947"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="sk.fiit.remotefiit.activity.MotionActivity" project="FiitRemote" 
+  <class id="16" language="java" name="sk.fiit.remotefiit.activity.MotionActivity" project="FiitRemote" 
     file="/FiitRemote/src/sk/fiit/remotefiit/activity/MotionActivity.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-123" y="756"/>    
+    <position height="-1" width="-1" x="993" y="-11874"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="sk.fiit.remotefiit.obj.DataToMovementTransformation" project="FiitRemote" 
-    file="/FiitRemote/src/sk/fiit/remotefiit/obj/DataToMovementTransformation.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="247" y="757"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="9" language="java" name="sk.fiit.remotefiit.obj.SettingsDialog" project="FiitRemote" 
-    file="/FiitRemote/src/sk/fiit/remotefiit/obj/SettingsDialog.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-459" y="141"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="10" language="java" name="sk.fiit.remotefiit.interfaces.DataFormatConverter" project="FiitRemote" 
+  <interface id="17" language="java" name="sk.fiit.remotefiit.interfaces.DataFormatConverter" project="FiitRemote" 
     file="/FiitRemote/src/sk/fiit/remotefiit/interfaces/DataFormatConverter.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-506" y="754"/>    
+    <position height="-1" width="-1" x="753" y="-10421"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="11" language="java" name="sk.fiit.remotefiit.activity.MotionActivityPedestrian" project="FiitRemote" 
+  <class id="18" language="java" name="sk.fiit.remotefiit.activity.MotionActivityPedestrian" project="FiitRemote" 
     file="/FiitRemote/src/sk/fiit/remotefiit/activity/MotionActivityPedestrian.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-123" y="428"/>    
+    <position height="-1" width="-1" x="1214" y="-11527"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="sk.fiit.remotefiit.activity.MotionActivityHelicopter" project="FiitRemote" 
-    file="/FiitRemote/src/sk/fiit/remotefiit/activity/MotionActivityHelicopter.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-391" y="429"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <dependency id="13">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="6"/>  
+  <dependency id="19">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="13"/>  
   </dependency>  
-  <dependency id="14">    
-    <bendpoint x="-293" y="860"/>    
-    <bendpoint x="-173" y="1000"/>    
-    <bendpoint x="443" y="919"/>    
+  <generalization id="20">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <dependency id="21">    
+    <bendpoint x="211" y="-11412"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <dependency id="22">    
+    <bendpoint x="504" y="-10859"/>    
     <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="6"/>  
+    <end type="TARGET" refId="7"/>  
   </dependency>  
-  <association id="15">    
-    <bendpoint x="452" y="1044"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="16" name="positionData"/>      
-      <multiplicity id="17" minimum="0" maximum="1"/>    
+  <dependency id="23">    
+    <bendpoint x="567" y="-10859"/>    
+    <bendpoint x="546" y="-10306"/>    
+    <bendpoint x="546" y="-9599"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <association id="24">    
+    <bendpoint x="1003" y="-11412"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="25" name="jsonCreator"/>      
+      <multiplicity id="26" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="27">    
+    <bendpoint x="1380" y="-10306"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="28" name="startPosition"/>      
+      <multiplicity id="29" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="30">    
+    <bendpoint x="1024" y="-11412"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="31" name="dataToMovementTransformation"/>      
+      <multiplicity id="32" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="18">    
-    <bendpoint x="-647" y="432"/>    
-    <bendpoint x="-651" y="1146"/>    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="3"/>  
-  </dependency>  
-  <dependency id="19">    
-    <bendpoint x="-39" y="987"/>    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="3"/>  
-  </dependency>  
-  <association id="20">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="21" name="settingsDialog"/>      
-      <multiplicity id="22" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="23">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="8"/>  
-  </dependency>  
-  <dependency id="24">    
-    <bendpoint x="62" y="619"/>    
-    <bendpoint x="452" y="618"/>    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="6"/>  
-  </dependency>  
-  <generalization id="25">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <dependency id="26">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="3"/>  
-  </dependency>  
-  <dependency id="27">    
-    <bendpoint x="-297" y="169"/>    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="5"/>  
-  </dependency>  
-  <generalization id="28">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <dependency id="29">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="8"/>  
-  </dependency>  
-  <dependency id="30">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="4"/>  
-  </dependency>  
-  <realization id="31">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="10"/>  
-  </realization>  
-  <dependency id="32">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="11"/>  
-  </dependency>  
   <dependency id="33">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="8"/>  
+    <bendpoint x="972" y="-10859"/>    
+    <bendpoint x="972" y="-10306"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="15"/>  
   </dependency>  
   <dependency id="34">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="2"/>  
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="7"/>  
   </dependency>  
-  <dependency id="35">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
-  <association id="36">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="37" name="jsonCreator"/>      
-      <multiplicity id="38" minimum="0" maximum="1"/>    
+  <association id="35">    
+    <bendpoint x="167" y="-10306"/>    
+    <bendpoint x="167" y="-9599"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="36" name="fs"/>      
+      <multiplicity id="37" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <dependency id="38">    
+    <bendpoint x="525" y="-10859"/>    
+    <bendpoint x="525" y="-10306"/>    
+    <bendpoint x="525" y="-9599"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
   <dependency id="39">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="2"/>  
+    <bendpoint x="209" y="-10306"/>    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="1"/>  
   </dependency>  
   <dependency id="40">    
-    <bendpoint x="210" y="977"/>    
-    <end type="SOURCE" refId="8"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="41">    
+    <bendpoint x="1422" y="-10859"/>    
+    <bendpoint x="1422" y="-10306"/>    
+    <bendpoint x="1422" y="-9599"/>    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <association id="42">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="43" name="settingsDialog"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="45">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="17"/>  
+  </realization>  
+  <dependency id="46">    
+    <bendpoint x="146" y="-10306"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="47">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <dependency id="48">    
+    <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="3"/>  
   </dependency>  
-  <association id="41">    
+  <generalization id="49">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <dependency id="50">    
+    <bendpoint x="125" y="-10306"/>    
+    <bendpoint x="125" y="-9599"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <dependency id="51">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <realization id="52">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <nesting id="53">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="14"/>  
+  </nesting>  
+  <dependency id="54">    
+    <bendpoint x="1359" y="-10859"/>    
+    <bendpoint x="1359" y="-10306"/>    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <dependency id="55">    
+    <bendpoint x="588" y="-10859"/>    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="56">    
+    <bendpoint x="86" y="-11412"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <association id="57">    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="42" name="dataToMovementTransformation"/>      
-      <multiplicity id="43" minimum="0" maximum="1"/>    
+      <attribute id="58" name="fs"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="44">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <generalization id="45">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <dependency id="46">    
+  <dependency id="60">    
     <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
-  <dependency id="47">    
-    <bendpoint x="-339" y="840"/>    
-    <bendpoint x="-542" y="902"/>    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="3"/>  
-  </dependency>  
-  <dependency id="48">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="3"/>  
-  </dependency>  
-  <dependency id="49">    
-    <bendpoint x="440" y="1173"/>    
-    <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="6"/>  
   </dependency>  
-  <dependency id="50">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="8"/>  
+  <dependency id="61">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="7"/>  
   </dependency>  
-  <dependency id="51">    
+  <dependency id="62">    
+    <bendpoint x="441" y="-11412"/>    
+    <bendpoint x="441" y="-10859"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="63">    
+    <bendpoint x="951" y="-10306"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <dependency id="64">    
+    <bendpoint x="546" y="-10859"/>    
+    <bendpoint x="567" y="-10306"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <dependency id="65">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="66">    
+    <bendpoint x="462" y="-11412"/>    
+    <bendpoint x="462" y="-10859"/>    
+    <bendpoint x="462" y="-10306"/>    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <association id="67">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="68" name="instance"/>      
+      <multiplicity id="69" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="70">    
+    <bendpoint x="1401" y="-10859"/>    
+    <bendpoint x="1401" y="-10306"/>    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="71">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="12"/>  
   </dependency>  
-  <dependency id="52">    
-    <bendpoint x="-577" y="822"/>    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="3"/>  
-  </dependency>  
-  <association id="53">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="54" name="startPosition"/>      
-      <multiplicity id="55" minimum="0" maximum="1"/>    
+  <association id="72">    
+    <bendpoint x="-43" y="-10306"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="73" name="tilt"/>      
+      <multiplicity id="74" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <dependency id="75">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="76">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="77">    
+    <bendpoint x="-78" y="-11412"/>    
+    <bendpoint x="-78" y="-10859"/>    
+    <bendpoint x="-78" y="-10306"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="14"/>  
+  </dependency>  
+  <dependency id="78">    
+    <bendpoint x="909" y="-10306"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <generalization id="79">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <realization id="80">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <dependency id="81">    
+    <bendpoint x="483" y="-10859"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="82">    
+    <bendpoint x="609" y="-10859"/>    
+    <bendpoint x="588" y="-10306"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <association id="83">    
+    <bendpoint x="1464" y="-11412"/>    
+    <bendpoint x="1464" y="-10859"/>    
+    <bendpoint x="1464" y="-10306"/>    
+    <bendpoint x="1464" y="-9599"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="84" name="fs"/>      
+      <multiplicity id="85" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="86">    
+    <bendpoint x="1443" y="-11412"/>    
+    <bendpoint x="1443" y="-10859"/>    
+    <bendpoint x="1443" y="-10306"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="87" name="positionData"/>      
+      <multiplicity id="88" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="89">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="90">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="91">    
+    <bendpoint x="651" y="-10859"/>    
+    <bendpoint x="930" y="-10306"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="92">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

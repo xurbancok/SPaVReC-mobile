@@ -14,6 +14,8 @@ public class DataToMovementTransformation implements DataTransformation{
 	private PositionData startPosition;
 	private int count;
 	private double sum,avg;
+	private final double treshold = 0.9;
+	private final double tresholdNeg = 1.1;
 	
 	@Override
 	public ArrayList<Movement> rawData(PositionData inputData, boolean extendedFunction, boolean reset) {
@@ -88,52 +90,52 @@ public class DataToMovementTransformation implements DataTransformation{
 	public ArrayList<Movement> pedestrianData(PositionData inputData) {
 		ArrayList<Movement> output = new ArrayList<Movement>();
 		
-		if(inputData.getAccelerometerY() < (CalibrationData.getTiltForwards()*1.1)){
+		if((inputData.getAccelerometerY() < (CalibrationData.getTiltForwards()*tresholdNeg))||(inputData.getAccelerometerY() < (CalibrationData.getTiltForwards()*treshold))){
 			Log.d("VR", "kalibrujem forwards");
-			count = CalibrationData.getTiltForwardsCount();
-			sum = (count*CalibrationData.getTiltForwards()+inputData.getAccelerometerY());
-			count++;
-			avg = sum/count;
+			//count = CalibrationData.getTiltForwardsCount();
+			sum = (10*CalibrationData.getTiltForwards()+inputData.getAccelerometerY());
+			//count++;
+			avg = sum/11;
 			CalibrationData.setTiltForwards(avg);
-			CalibrationData.setTiltForwardsCount(count);
+			CalibrationData.setTiltForwardsCount(10);
 			
 			if(inputData.getAccelerometerY() < CalibrationData.getTiltForwards()){
 				output.add(Movement.MOVE_FORWARDS);
 			}
 		}
-		else if(inputData.getAccelerometerY() > (CalibrationData.getTiltBackwards()*0.9)){
+		else if(inputData.getAccelerometerY() > (CalibrationData.getTiltBackwards()*treshold)){
 			Log.d("VR", "kalibrujem back");
-			count = CalibrationData.getTiltBackwardsCount();
-			sum = (count*CalibrationData.getTiltBackwards()+inputData.getAccelerometerY());
-			count++;
-			avg = sum/count;
+			//count = CalibrationData.getTiltBackwardsCount();
+			sum = (10*CalibrationData.getTiltBackwards()+inputData.getAccelerometerY());
+			//count++;
+			avg = sum/11;
 			CalibrationData.setTiltBackwards(avg);
-			CalibrationData.setTiltBackwardsCount(count);		
+			CalibrationData.setTiltBackwardsCount(10);		
 			
 			if(inputData.getAccelerometerY() > CalibrationData.getTiltBackwards()){
 				output.add(Movement.MOVE_BACKWARDS);
 			}
 		}
-		if(inputData.getAccelerometerX() > CalibrationData.getTiltLeft()*0.9){
+		if(inputData.getAccelerometerX() > CalibrationData.getTiltLeft()*treshold){
 			Log.d("VR", "kalibrujem left");
-			count = CalibrationData.getTiltLeftCount();
-			sum = (count*CalibrationData.getTiltLeft()+inputData.getAccelerometerX());
-			count++;
-			avg = sum/count;
+			//count = CalibrationData.getTiltLeftCount();
+			sum = (10*CalibrationData.getTiltLeft()+inputData.getAccelerometerX());
+			//count++;
+			avg = sum/11;
 			CalibrationData.setTiltLeft(avg);
-			CalibrationData.setTiltLeftCount(count);
+			CalibrationData.setTiltLeftCount(10);
 			if(inputData.getAccelerometerX() > (CalibrationData.getTiltLeft())){
 				output.add(Movement.MOVE_LEFT);
 			}
 		}
-		else if(inputData.getAccelerometerX() < (CalibrationData.getTiltRight()*0.9)){
+		else if(inputData.getAccelerometerX() < (CalibrationData.getTiltRight()*treshold)){
 			Log.d("VR", "kalibrujem right");
-			count = CalibrationData.getTiltRightCount();
-			sum = (count*CalibrationData.getTiltRight()+inputData.getAccelerometerX());
-			count++;
-			avg = sum/count;
+			//count = CalibrationData.getTiltRightCount();
+			sum = (10*CalibrationData.getTiltRight()+inputData.getAccelerometerX());
+			//count++;
+			avg = sum/11;
 			CalibrationData.setTiltRight(avg);
-			CalibrationData.setTiltRightCount(count);
+			CalibrationData.setTiltRightCount(10);
 			if(inputData.getAccelerometerX() < (CalibrationData.getTiltRight())){
 				output.add(Movement.MOVE_RIGHT);
 			}
@@ -198,51 +200,51 @@ public class DataToMovementTransformation implements DataTransformation{
 	public ArrayList<Movement> helicopterData(PositionData inputData) {
 		ArrayList<Movement> output = new ArrayList<Movement>();
 		
-		if(inputData.getAccelerometerY() < (CalibrationData.getTiltForwards()*1.1)){
+		if((inputData.getAccelerometerY() < (CalibrationData.getTiltForwards()*tresholdNeg))||(inputData.getAccelerometerY() < (CalibrationData.getTiltForwards()*treshold))){
 			Log.d("VR", "kalibrujem forwards");
-			count = CalibrationData.getTiltForwardsCount();
-			sum = (count*CalibrationData.getTiltForwards()+inputData.getAccelerometerY());
-			count++;
-			avg = sum/count;
+			//count = CalibrationData.getTiltForwardsCount();
+			sum = (10*CalibrationData.getTiltForwards()+inputData.getAccelerometerY());
+			//count++;
+			avg = sum/11;
 			CalibrationData.setTiltForwards(avg);
-			CalibrationData.setTiltForwardsCount(count);
+			CalibrationData.setTiltForwardsCount(10);
 			if(inputData.getAccelerometerY() < CalibrationData.getTiltForwards()){
 				output.add(Movement.MOVE_FORWARDS);
 			}
 		}
-		else if(inputData.getAccelerometerY() > (CalibrationData.getTiltBackwards()*0.9)){
+		else if(inputData.getAccelerometerY() > (CalibrationData.getTiltBackwards()*treshold)){
 			Log.d("VR", "kalibrujem back");
-			count = CalibrationData.getTiltBackwardsCount();
-			sum = (count*CalibrationData.getTiltBackwards()+inputData.getAccelerometerY());
-			count++;
-			avg = sum/count;
+			//count = CalibrationData.getTiltBackwardsCount();
+			sum = (10*CalibrationData.getTiltBackwards()+inputData.getAccelerometerY());
+			//count++;
+			avg = sum/11;
 			CalibrationData.setTiltBackwards(avg);
-			CalibrationData.setTiltBackwardsCount(count);		
+			CalibrationData.setTiltBackwardsCount(10);		
 			
 			if(inputData.getAccelerometerY() > CalibrationData.getTiltBackwards()){
 				output.add(Movement.MOVE_BACKWARDS);
 			}
 		}
-		if(inputData.getAccelerometerX() > CalibrationData.getTiltLeft()*0.9){
+		if(inputData.getAccelerometerX() > CalibrationData.getTiltLeft()*treshold){
 			Log.d("VR", "kalibrujem left");
-			count = CalibrationData.getTiltLeftCount();
-			sum = (count*CalibrationData.getTiltLeft()+inputData.getAccelerometerX());
-			count++;
-			avg = sum/count;
+			//count = CalibrationData.getTiltLeftCount();
+			sum = (10*CalibrationData.getTiltLeft()+inputData.getAccelerometerX());
+			//count++;
+			avg = sum/11;
 			CalibrationData.setTiltLeft(avg);
-			CalibrationData.setTiltLeftCount(count);
+			CalibrationData.setTiltLeftCount(10);
 			if(inputData.getAccelerometerX() > (CalibrationData.getTiltLeft())){
 				output.add(Movement.MOVE_LEFT);
 			}
 		}
-		else if(inputData.getAccelerometerX() < (CalibrationData.getTiltRight()*0.9)){
+		else if(inputData.getAccelerometerX() < (CalibrationData.getTiltRight()*treshold)){
 			Log.d("VR", "kalibrujem right");
-			count = CalibrationData.getTiltRightCount();
-			sum = (count*CalibrationData.getTiltRight()+inputData.getAccelerometerX());
-			count++;
-			avg = sum/count;
+			//count = CalibrationData.getTiltRightCount();
+			sum = (10*CalibrationData.getTiltRight()+inputData.getAccelerometerX());
+			//count++;
+			avg = sum/11;
 			CalibrationData.setTiltRight(avg);
-			CalibrationData.setTiltRightCount(count);
+			CalibrationData.setTiltRightCount(10);
 			if(inputData.getAccelerometerX() < (CalibrationData.getTiltRight())){
 				output.add(Movement.MOVE_RIGHT);
 			}
@@ -330,7 +332,7 @@ public class DataToMovementTransformation implements DataTransformation{
 		ArrayList<Movement> output = new ArrayList<Movement>();
 		
 		//pri vertikalnej polohe su znamienka vlavo a vpravo naopak 
-		if(inputData.getAccelerometerY() < (-CalibrationData.getTiltLeft()*0.9)){
+		if(inputData.getAccelerometerY() < (-CalibrationData.getTiltLeft()*treshold)){
 			Log.d("VR", "kalibrujem left");
 			count = CalibrationData.getTiltLeftCount();
 			sum = (count*CalibrationData.getTiltLeft()+(-inputData.getAccelerometerY()));
@@ -342,39 +344,39 @@ public class DataToMovementTransformation implements DataTransformation{
 				output.add(Movement.LOOK_LEFT);
 			}
 		}
-		else if(inputData.getAccelerometerY() > (-CalibrationData.getTiltRight()*0.9)){
+		else if(inputData.getAccelerometerY() > (-CalibrationData.getTiltRight()*treshold)){
 			Log.d("VR", "kalibrujem right");
-			count = CalibrationData.getTiltRightCount();
-			sum = (count*CalibrationData.getTiltRight()+(-inputData.getAccelerometerY()));
-			count++;
-			avg = sum/count;
+			//count = CalibrationData.getTiltRightCount();
+			sum = (10*CalibrationData.getTiltRight()+(-inputData.getAccelerometerY()));
+			//count++;
+			avg = sum/11;
 			CalibrationData.setTiltRight(avg);
-			CalibrationData.setTiltRightCount(count);
+			CalibrationData.setTiltRightCount(10);
 			if(inputData.getAccelerometerY() > -CalibrationData.getTiltRight()){
 				output.add(Movement.LOOK_RIGHT);
 			}
 		}
 
-		if(inputData.getAccelerometerX() < (CalibrationData.getTiltForwards()*1.1)){
+		if((inputData.getAccelerometerX() < (CalibrationData.getTiltForwards()*tresholdNeg))||(inputData.getAccelerometerX() < (CalibrationData.getTiltForwards()*treshold))){
 			Log.d("VR", "kalibrujem forwards");
-			count = CalibrationData.getTiltForwardsCount();
-			sum = (count*CalibrationData.getTiltForwards()+inputData.getAccelerometerX());
-			count++;
-			avg = sum/count;
+			//count = CalibrationData.getTiltForwardsCount();
+			sum = (10*CalibrationData.getTiltForwards()+inputData.getAccelerometerX());
+			//count++;
+			avg = sum/11;
 			CalibrationData.setTiltForwards(avg);
-			CalibrationData.setTiltForwardsCount(count);
+			CalibrationData.setTiltForwardsCount(10);
 			if(inputData.getAccelerometerX() < CalibrationData.getTiltForwards()){
 				output.add(Movement.MOVE_FORWARDS);
 			}	
 		}
-		else if(inputData.getAccelerometerX() > (CalibrationData.getTiltBackwards()*0.9)){
+		else if(inputData.getAccelerometerX() > (CalibrationData.getTiltBackwards()*treshold)){
 			Log.d("VR", "kalibrujem back");
-			count = CalibrationData.getTiltBackwardsCount();
-			sum = (count*CalibrationData.getTiltBackwards()+inputData.getAccelerometerX());
-			count++;
-			avg = sum/count;
+			//count = CalibrationData.getTiltBackwardsCount();
+			sum = (10*CalibrationData.getTiltBackwards()+inputData.getAccelerometerX());
+			//count++;
+			avg = sum/11;
 			CalibrationData.setTiltBackwards(avg);
-			CalibrationData.setTiltBackwardsCount(count);
+			CalibrationData.setTiltBackwardsCount(10);
 			
 			if(inputData.getAccelerometerX() > CalibrationData.getTiltBackwards()){
 				output.add(Movement.MOVE_BACKWARDS);

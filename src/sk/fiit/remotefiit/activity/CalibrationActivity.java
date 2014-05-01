@@ -1,6 +1,7 @@
 package sk.fiit.remotefiit.activity;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -100,11 +101,11 @@ public class CalibrationActivity extends Activity implements SensorEventListener
 			public void onClick(View v) {
 				startButton.setImageResource(R.drawable.repeat);
 				values = new ArrayList<Double>();
-				Toast.makeText(CalibrationActivity.this, "Calibration will starts in 3 seconds...", Toast.LENGTH_SHORT).show();
+				Toast.makeText(CalibrationActivity.this, "Calibration will starts in 2 seconds...", Toast.LENGTH_SHORT).show();
 				new Thread() {
 					public void run() {
 						try {
-							Thread.sleep(3000);
+							Thread.sleep(2000);
 							final Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
 						vibrator.vibrate(100);
 						if (accelerometer != null && mSensorManager != null)
@@ -122,7 +123,7 @@ public class CalibrationActivity extends Activity implements SensorEventListener
 									}
 								});
 							}
-						}, 1000);
+						}, 2000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -227,30 +228,49 @@ public class CalibrationActivity extends Activity implements SensorEventListener
 	protected void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this);
-
-        double sum = 0;
-        for(Double d : values){
-        	sum = sum +d;
-        }
-		switch(tilt){
+        double sum;
+        
+        if(values.size()<10)return;	//nepodarilo sa zozbierat aspon 10 hodnot na kalibraciu
+        
+        switch(tilt){
 		case TILT_LEFT:
-			CalibrationData.setTiltLeft(roundTwoDecimals(sum/values.size()));
-			CalibrationData.setTiltLeftCount(values.size());
+			Collections.sort(values); 
+	        sum = 0;
+	        for (int i = 0; i < 10; i++) {
+				sum = sum + values.get(values.size()-1-i);
+			}
+			CalibrationData.setTiltLeft(roundTwoDecimals(sum/10));
+			CalibrationData.setTiltLeftCount(10);
 	        Toast.makeText(getApplicationContext(), CalibrationData.getTiltLeft()+" "+CalibrationData.getTiltLeftCount(), Toast.LENGTH_SHORT).show();
 			break;
 		case TILT_RIGHT:
-			CalibrationData.setTiltRight(roundTwoDecimals(sum/values.size()));
-			CalibrationData.setTiltRightCount(values.size());
+			Collections.sort(values); 
+	        sum = 0;
+	        for (int i = 0; i < 10; i++) {
+				sum = sum + values.get(i);
+			}			
+			CalibrationData.setTiltRight(roundTwoDecimals(sum/10));
+			CalibrationData.setTiltRightCount(10);
 	        Toast.makeText(getApplicationContext(), CalibrationData.getTiltRight()+" "+CalibrationData.getTiltRightCount(), Toast.LENGTH_SHORT).show();
 			break;
-			case TILT_FORWARDS:
-			CalibrationData.setTiltForwards(roundTwoDecimals(sum/values.size()));
-			CalibrationData.setTiltForwardsCount(values.size());
+		case TILT_FORWARDS:
+			Collections.sort(values); 
+	        sum = 0;
+	        for (int i = 0; i < 10; i++) {
+				sum = sum + values.get(i);
+			}
+			CalibrationData.setTiltForwards(roundTwoDecimals(sum/10));
+			CalibrationData.setTiltForwardsCount(10);
 	        Toast.makeText(getApplicationContext(), CalibrationData.getTiltForwards()+" "+CalibrationData.getTiltForwardsCount(), Toast.LENGTH_SHORT).show();
 			break;
 		case TILT_BACKWARDS:
-			CalibrationData.setTiltBackwards(roundTwoDecimals(sum/values.size()));
-			CalibrationData.setTiltBackwardsCount(values.size());
+			Collections.sort(values); 
+	        sum = 0;
+	        for (int i = 0; i < 10; i++) {
+				sum = sum + values.get(values.size()-1-i);
+			}
+			CalibrationData.setTiltBackwards(roundTwoDecimals(sum/10));
+			CalibrationData.setTiltBackwardsCount(10);
 	        Toast.makeText(getApplicationContext(), CalibrationData.getTiltBackwards()+" "+CalibrationData.getTiltBackwardsCount(), Toast.LENGTH_SHORT).show();
 			break;
 		}

@@ -21,7 +21,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView1"
         android:layout_marginTop="19dp"
-        android:text="nejaky obkec \n \n lalalalala"
+        android:text="Instruction: Press &quot;Start&quot; button to start calibration. Tilt your device as you see in the picture. After a short vibration of device the calibration is done."
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView

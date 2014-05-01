@@ -3,7 +3,9 @@ package sk.fiit.remotefiit.activity;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import sk.fiit.remotefiit.interfaces.DataStorage;
 import sk.fiit.remotefiit.obj.DataToMovementTransformation;
+import sk.fiit.remotefiit.obj.FileStorage;
 import sk.fiit.remotefiit.obj.JSONCreator;
 import sk.fiit.remotefiit.obj.PositionData;
 
@@ -42,13 +44,14 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 	
 	protected ImageView pauseStred;
 	protected ImageView pauseZaklad;
+	protected ImageView pauseBtn;
 	
 	protected ImageView buttonLeft;
 	protected ImageView buttonRight;	
 
 	//============ z povodneho prototypu zo zakladnej triedy =======
 	protected SensorManager mSensorManager;
-	protected Sensor gyroscope, accelerometer, proximity, orientation, magneticField, linearAcceleration;
+	protected Sensor gyroscope, accelerometer, proximity, orientation, magneticField, linearAcceleration, gravity;
 	protected PositionData positionData = new PositionData();
 	protected DataToMovementTransformation dataToMovementTransformation = new DataToMovementTransformation();
 	protected JSONCreator jsonCreator = new JSONCreator();
@@ -56,7 +59,8 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 	protected InetAddress IPAddress = null;
 	protected int port;
 	//==============================================================
-		
+	protected DataStorage fs = new FileStorage();	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,9 +92,10 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 		
 		joystickStred = (ImageView) findViewById(R.id.imageViewStred);
 		joystickZaklad = (ImageView) findViewById(R.id.imageViewZaklad);
+		pauseBtn = (ImageView) findViewById(R.id.imageViewPauseBtn);
+		pauseBtn.setTag(R.drawable.pause_btn);
 		
 		pauseStred = (ImageView) findViewById(R.id.imageViewPause);
-		pauseStred.setTag(R.drawable.pause);
 		pauseZaklad = (ImageView) findViewById(R.id.imageViewPauseZaklad);
 		
 		buttonLeft = (ImageView) findViewById(R.id.imageViewButtonLeft);
@@ -104,6 +109,8 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 		    if((mSensorManager.getSensorList(Sensor.TYPE_ORIENTATION)!=null) && (mSensorManager.getSensorList(Sensor.TYPE_ORIENTATION).size()>0))orientation = mSensorManager.getSensorList(Sensor.TYPE_ORIENTATION).get(0);
 		    if((mSensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD)!=null) && (mSensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD).size()>0))magneticField = mSensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD).get(0);
 		    if((mSensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION)!=null) && (mSensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION).size()>0))linearAcceleration = mSensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION).get(0);
+		    if((mSensorManager.getSensorList(Sensor.TYPE_GRAVITY)!=null) && (mSensorManager.getSensorList(Sensor.TYPE_GRAVITY).size()>0))gravity = mSensorManager.getSensorList(Sensor.TYPE_GRAVITY).get(0);
+
 		}
 
 	}

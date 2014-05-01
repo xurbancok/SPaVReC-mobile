@@ -77,6 +77,15 @@
          android:id="@+id/imageViewPause"
          android:layout_width="30dp"
          android:layout_height="30dp"
-         android:src="@drawable/pause" />
+         android:src="@drawable/level" />
+
+     <ImageView
+         android:id="@+id/imageViewPauseBtn"
+         android:layout_width="100dp"
+         android:layout_height="40dp"
+         android:layout_marginRight="10dp"
+         android:layout_marginTop="10dp"
+         android:layout_alignParentTop="true"
+         android:src="@drawable/pause_btn" />
 
 </RelativeLayout>

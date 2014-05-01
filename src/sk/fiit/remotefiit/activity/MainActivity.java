@@ -42,8 +42,15 @@ public class MainActivity extends Activity {
 //		motion.putExtra("IP", host[0]);
 //		motion.putExtra("port", host[1]);
 //		startActivity(motion);
-		settingsDialog = new SettingsDialog(MainActivity.this, hostAdress, this);
-		settingsDialog.show();
+
+		Intent i = new Intent(getApplicationContext(),SettingsActivity.class);
+		//Intent i = new Intent(getApplicationContext(),CalibrationActivity.class);
+		i.putExtra("tilt", Tilting.TILT_LEFT.toString());
+		startActivity(i);
+		
+		
+//		settingsDialog = new SettingsDialog(MainActivity.this, hostAdress, this);
+//		settingsDialog.show();
 	}
 
 	@Override

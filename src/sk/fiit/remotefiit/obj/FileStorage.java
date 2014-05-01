@@ -47,10 +47,10 @@ public class FileStorage implements DataStorage {
 			CalibrationData.setTiltForwards(-1);		
 			CalibrationData.setTiltLeft(3);
 			CalibrationData.setTiltRight(-3);
-			CalibrationData.setTiltBackwardsCount(1);
-			CalibrationData.setTiltForwardsCount(1);		
-			CalibrationData.setTiltLeftCount(1);
-			CalibrationData.setTiltRightCount(1);
+			CalibrationData.setTiltBackwardsCount(10);
+			CalibrationData.setTiltForwardsCount(10);		
+			CalibrationData.setTiltLeftCount(10);
+			CalibrationData.setTiltRightCount(10);
 		}
 
 	}

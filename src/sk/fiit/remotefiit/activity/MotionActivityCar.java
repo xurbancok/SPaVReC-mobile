@@ -35,7 +35,8 @@ public class MotionActivityCar extends MotionActivity{
 	private double yRange;
 	
 	private RelativeLayout.LayoutParams pauseStredLayoutParam;
-
+	private RelativeLayout.LayoutParams pauseBtnLayoutParam;
+	
 	private int pauseX;
 	private int pauseY;
 	private int volnost;
@@ -71,7 +72,9 @@ public class MotionActivityCar extends MotionActivity{
 		pauseStredLayoutParam.leftMargin=0;
 		pauseZaklad.setLayoutParams(pauseStredLayoutParam);
 		
-		
+		pauseBtnLayoutParam = (RelativeLayout.LayoutParams) pauseBtn.getLayoutParams();
+		pauseBtnLayoutParam.leftMargin=((RelativeLayout.LayoutParams) pauseZaklad.getLayoutParams()).width+10;
+		pauseBtn.setLayoutParams(pauseBtnLayoutParam);
 		
 		timerRunnable = new Runnable() {
 			@Override
@@ -86,12 +89,12 @@ public class MotionActivityCar extends MotionActivity{
 				}
 			};
 			
-			pauseStred.setOnClickListener(new OnClickListener() {
+			pauseBtn.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if(Integer.parseInt(pauseStred.getTag().toString())==R.drawable.pause){
-						pauseStred.setImageResource(R.drawable.play);
-						pauseStred.setTag(R.drawable.play);
+					if(Integer.parseInt(pauseBtn.getTag().toString())==R.drawable.pause_btn){
+						pauseBtn.setImageResource(R.drawable.resume);
+						pauseBtn.setTag(R.drawable.resume);
 						centerPauseButton();
 //				       
 //						mSensorManager.unregisterListener(MotionActivityPedestrian.this);
@@ -99,8 +102,8 @@ public class MotionActivityCar extends MotionActivity{
 				        MotionActivityCar.this.onPause();
 						Toast.makeText(getApplicationContext(), "Data capture pause", Toast.LENGTH_SHORT).show();
 					}else{
-						pauseStred.setImageResource(R.drawable.pause);
-						pauseStred.setTag(R.drawable.pause);
+						pauseBtn.setImageResource(R.drawable.pause_btn);
+						pauseBtn.setTag(R.drawable.pause_btn);
 						MotionActivityCar.this.onResume();
 						Toast.makeText(getApplicationContext(),  "Data capture start", Toast.LENGTH_SHORT).show();
 					}
@@ -173,7 +176,7 @@ public class MotionActivityCar extends MotionActivity{
 		
 			pauseStredLayoutParam = (RelativeLayout.LayoutParams) pauseStred.getLayoutParams();
 			pauseStredLayoutParam.leftMargin = (int) (pauseX - (dielX*event.values[1])+xRange);
-			pauseStredLayoutParam.topMargin = (int) (pauseY - (dielY*((event.values[0])-(yRange))));
+			pauseStredLayoutParam.topMargin = (int) (pauseY - (dielY*((event.values[0])-(CalibrationData.getTiltBackwards()))));
 			pauseStred.setLayoutParams(pauseStredLayoutParam);
 			
 			break;
@@ -186,5 +189,8 @@ public class MotionActivityCar extends MotionActivity{
         super.onPause();
         mSensorManager.unregisterListener(this);
         timerHandler.removeCallbacks(timerRunnable);
+        fs.storeData(CalibrationData.getTiltForwards(), CalibrationData.getTiltBackwards(), CalibrationData.getTiltLeft(), CalibrationData.getTiltRight(), 
+				CalibrationData.getTiltForwardsCount(), CalibrationData.getTiltBackwardsCount(), CalibrationData.getTiltLeftCount(), CalibrationData.getTiltRightCount());
+
     }
 }

@@ -39,13 +39,12 @@ public class MotionActivityPedestrian extends MotionActivity{
 	private boolean isStill = true;
 	private final double stillWindow = (3*Math.PI)/180;	//15 stupnov je trashold, kedy predpokladame, ze zariadenie je v pokoji
 														//senzory vracaju v radianoch data
-	private DataStorage fs = new FileStorage();
 	//List<Long> cas = new ArrayList<Long>();
 	
 	private double xRange;
 	private double yRange;
 	
-	private RelativeLayout.LayoutParams pauseStredLayoutParam;
+	private RelativeLayout.LayoutParams pauseStredLayoutParam, pauseBtnLayoutParam;
 
 	private int pauseX;
 	private int pauseY;
@@ -63,6 +62,11 @@ public class MotionActivityPedestrian extends MotionActivity{
 		pauseStredLayoutParam.addRule(RelativeLayout.CENTER_HORIZONTAL);
 		pauseZaklad.setLayoutParams(pauseStredLayoutParam);
 
+		pauseBtnLayoutParam = (RelativeLayout.LayoutParams) pauseBtn.getLayoutParams();
+		pauseBtnLayoutParam.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+		pauseBtn.setLayoutParams(pauseBtnLayoutParam);
+		
+		
 		if(mSensorManager == null){
 			Toast.makeText(getApplicationContext(), "Error: Sensor Manager is missing", Toast.LENGTH_SHORT).show();
 			finish();
@@ -91,12 +95,12 @@ public class MotionActivityPedestrian extends MotionActivity{
 				}
 			};
 
-			pauseStred.setOnClickListener(new OnClickListener() {
+			pauseBtn.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if(Integer.parseInt(pauseStred.getTag().toString())==R.drawable.pause){
-						pauseStred.setImageResource(R.drawable.play);
-						pauseStred.setTag(R.drawable.play);
+					if(Integer.parseInt(pauseBtn.getTag().toString())==R.drawable.pause_btn){
+						pauseBtn.setImageResource(R.drawable.resume);
+						pauseBtn.setTag(R.drawable.resume);
 						centerPauseButton();
 //				       
 //						mSensorManager.unregisterListener(MotionActivityPedestrian.this);
@@ -104,8 +108,8 @@ public class MotionActivityPedestrian extends MotionActivity{
 				        MotionActivityPedestrian.this.onPause();
 						Toast.makeText(getApplicationContext(), "Data capture pause", Toast.LENGTH_SHORT).show();
 					}else{
-						pauseStred.setImageResource(R.drawable.pause);
-						pauseStred.setTag(R.drawable.pause);
+						pauseBtn.setImageResource(R.drawable.pause_btn);
+						pauseBtn.setTag(R.drawable.pause_btn);
 						MotionActivityPedestrian.this.onResume();
 						Toast.makeText(getApplicationContext(),  "Data capture start", Toast.LENGTH_SHORT).show();
 					}
@@ -164,7 +168,7 @@ public class MotionActivityPedestrian extends MotionActivity{
 	
 			pauseStredLayoutParam = (RelativeLayout.LayoutParams) pauseStred.getLayoutParams();
 			pauseStredLayoutParam.leftMargin = (int) (pauseX + (dielX*event.values[0])+xRange);
-			pauseStredLayoutParam.topMargin = (int) (pauseY - (dielY*((event.values[1])-(yRange))));
+			pauseStredLayoutParam.topMargin = (int) (pauseY - (dielY*((event.values[1])-(CalibrationData.getTiltBackwards()))));
 			pauseStred.setLayoutParams(pauseStredLayoutParam);
 
 			break;	

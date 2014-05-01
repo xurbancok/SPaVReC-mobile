@@ -6,6 +6,8 @@ public class CalibrationData {
 	private static int tiltForwardsCount, tiltBackwardsCount, tiltLeftCount, tiltRightCount;
 	private static FileStorage fs = new FileStorage();
 
+	private static double noiseX, noiseY;
+	
 	public enum Tilting{
 		TILT_LEFT, TILT_RIGHT, TILT_FORWARDS, TILT_BACKWARDS;
 	}
@@ -83,5 +85,21 @@ public class CalibrationData {
 
 	public static void setTiltLeftCount(int tiltLeftCount) {
 		CalibrationData.tiltLeftCount = tiltLeftCount;
+	}
+
+	public static double getNoiseX() {
+		return noiseX;
+	}
+
+	public static void setNoiseX(double noiseX) {
+		CalibrationData.noiseX = noiseX;
+	}
+
+	public static double getNoiseY() {
+		return noiseY;
+	}
+
+	public static void setNoiseY(double noiseY) {
+		CalibrationData.noiseY = noiseY;
 	}
 }

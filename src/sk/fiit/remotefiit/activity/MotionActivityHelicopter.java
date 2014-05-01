@@ -35,7 +35,7 @@ public class MotionActivityHelicopter extends MotionActivity{
 	private double xRange;
 	private double yRange;
 	
-	private RelativeLayout.LayoutParams pauseStredLayoutParam;
+	private RelativeLayout.LayoutParams pauseStredLayoutParam, pauseBtnLayoutParam;
 
 	private int pauseX;
 	private int pauseY;
@@ -49,6 +49,10 @@ public class MotionActivityHelicopter extends MotionActivity{
 		RelativeLayout.LayoutParams pauseStredLayoutParam = (RelativeLayout.LayoutParams) pauseZaklad.getLayoutParams();
 		pauseStredLayoutParam.addRule(RelativeLayout.CENTER_HORIZONTAL);
 		pauseZaklad.setLayoutParams(pauseStredLayoutParam);
+		
+		pauseBtnLayoutParam = (RelativeLayout.LayoutParams) pauseBtn.getLayoutParams();
+		pauseBtnLayoutParam.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+		pauseBtn.setLayoutParams(pauseBtnLayoutParam);
 		
 		if(mSensorManager == null){
 			Toast.makeText(getApplicationContext(), "Error: Sensor Manager is missing", Toast.LENGTH_SHORT).show();
@@ -74,18 +78,18 @@ public class MotionActivityHelicopter extends MotionActivity{
 				}
 			};
 			
-			pauseStred.setOnClickListener(new OnClickListener() {
+			pauseBtn.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if(Integer.parseInt(pauseStred.getTag().toString())==R.drawable.pause){
-						pauseStred.setImageResource(R.drawable.play);
-						pauseStred.setTag(R.drawable.play);
+					if(Integer.parseInt(pauseBtn.getTag().toString())==R.drawable.pause_btn){
+						pauseBtn.setImageResource(R.drawable.resume);
+						pauseBtn.setTag(R.drawable.resume);
 						centerPauseButton();
 				        MotionActivityHelicopter.this.onPause();
 						Toast.makeText(getApplicationContext(), "Data capture pause", Toast.LENGTH_SHORT).show();
 					}else{
-						pauseStred.setImageResource(R.drawable.pause);
-						pauseStred.setTag(R.drawable.pause);
+						pauseBtn.setImageResource(R.drawable.pause_btn);
+						pauseBtn.setTag(R.drawable.pause_btn);
 						MotionActivityHelicopter.this.onResume();
 						Toast.makeText(getApplicationContext(),  "Data capture start", Toast.LENGTH_SHORT).show();
 					}
@@ -160,7 +164,7 @@ public class MotionActivityHelicopter extends MotionActivity{
 			
 			pauseStredLayoutParam = (RelativeLayout.LayoutParams) pauseStred.getLayoutParams();
 			pauseStredLayoutParam.leftMargin = (int) (pauseX + (dielX*event.values[0])+xRange);
-			pauseStredLayoutParam.topMargin = (int) (pauseY - (dielY*((event.values[1])-(yRange))));
+			pauseStredLayoutParam.topMargin = (int) (pauseY - (dielY*((event.values[1])-(CalibrationData.getTiltBackwards()))));
 			pauseStred.setLayoutParams(pauseStredLayoutParam);
 			//high-pass filter pre akcelerometer data. vysledok je cca rovnaky ako
 			//pri senzore linearneho zrychlenia
@@ -168,6 +172,7 @@ public class MotionActivityHelicopter extends MotionActivity{
 //		    gravity[0] = alpha * gravity[0] + (1 - alpha) * event.values[0];
 //	        gravity[1] = alpha * gravity[1] + (1 - alpha) * event.values[1];
 //	        gravity[2] = alpha * gravity[2] + (1 - alpha) * event.values[2];
+//	        Log.d("SENZOR",gravity[0]+" "+gravity[1]+" "+gravity[2]);
 //
 //	        linear_acceleration[0] = event.values[0] - gravity[0];
 //	        linear_acceleration[1] = event.values[1] - gravity[1];
@@ -209,5 +214,8 @@ public class MotionActivityHelicopter extends MotionActivity{
         super.onPause();
         mSensorManager.unregisterListener(this);
         timerHandler.removeCallbacks(timerRunnable);
+        fs.storeData(CalibrationData.getTiltForwards(), CalibrationData.getTiltBackwards(), CalibrationData.getTiltLeft(), CalibrationData.getTiltRight(), 
+				CalibrationData.getTiltForwardsCount(), CalibrationData.getTiltBackwardsCount(), CalibrationData.getTiltLeftCount(), CalibrationData.getTiltRightCount());
+
     }
 }
