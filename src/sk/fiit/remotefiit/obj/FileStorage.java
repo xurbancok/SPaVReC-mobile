@@ -36,6 +36,10 @@ public class FileStorage implements DataStorage {
 					CalibrationData.setTiltForwardsCount(jObject.getInt("tiltForwardsCount"));		
 					CalibrationData.setTiltLeftCount(jObject.getInt("tiltLeftCount"));
 					CalibrationData.setTiltRightCount(jObject.getInt("tiltRightCount"));					
+				
+					CalibrationData.setVeticalMovementUp(jObject.getDouble("up"));
+					CalibrationData.setVeticalMovementDown(jObject.getInt("down"));				
+
 				}catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -44,20 +48,23 @@ public class FileStorage implements DataStorage {
 		}
 		else{
 			CalibrationData.setTiltBackwards(4);
-			CalibrationData.setTiltForwards(-1);		
+			CalibrationData.setTiltForwards(1);		
 			CalibrationData.setTiltLeft(3);
 			CalibrationData.setTiltRight(-3);
 			CalibrationData.setTiltBackwardsCount(10);
 			CalibrationData.setTiltForwardsCount(10);		
 			CalibrationData.setTiltLeftCount(10);
 			CalibrationData.setTiltRightCount(10);
+			CalibrationData.setVeticalMovementUp(3);
+			CalibrationData.setVeticalMovementDown(-3);
+			
 		}
 
 	}
 
 	@Override
 	public void storeData(double tiltForwards, double tiltBackwards, double tiltLeft, double tiltRight,
-			int tiltForwardsCount, int tiltBackwardsCount, int tiltLeftCount, int tiltRightCount) {
+			int tiltForwardsCount, int tiltBackwardsCount, int tiltLeftCount, int tiltRightCount, double up, double down) {
 		File root = Environment.getExternalStorageDirectory();
 		File dir = new File(root, "/FiitRemote/");
 		dir.mkdirs(); 
@@ -74,6 +81,9 @@ public class FileStorage implements DataStorage {
 		        	result.put("tiltForwardsCount", tiltForwardsCount);
 		        	result.put("tiltLeftCount", tiltLeftCount);
 		        	result.put("tiltRightCount",tiltRightCount);
+		        	
+		        	result.put("up", up);
+		        	result.put("down",down);
 		        	
 		        	FileWriter filewriter = new FileWriter(file);
 		            BufferedWriter out = new BufferedWriter(filewriter);

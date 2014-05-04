@@ -204,6 +204,6 @@ public class MotionActivityPedestrian extends MotionActivity{
         mSensorManager.unregisterListener(this);
         timerHandler.removeCallbacks(timerRunnable);
         fs.storeData(CalibrationData.getTiltForwards(), CalibrationData.getTiltBackwards(), CalibrationData.getTiltLeft(), CalibrationData.getTiltRight(), 
-				CalibrationData.getTiltForwardsCount(), CalibrationData.getTiltBackwardsCount(), CalibrationData.getTiltLeftCount(), CalibrationData.getTiltRightCount());
+				CalibrationData.getTiltForwardsCount(), CalibrationData.getTiltBackwardsCount(), CalibrationData.getTiltLeftCount(), CalibrationData.getTiltRightCount(),CalibrationData.getVeticalMovementUp(),CalibrationData.getVeticalMovementDown());
     }
 }

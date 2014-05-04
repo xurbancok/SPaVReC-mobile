@@ -209,11 +209,13 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 				if (event.getAction() == MotionEvent.ACTION_DOWN){
 					buttonLeft.setImageResource(R.drawable.button_left_down);
 					//Toast.makeText(getApplicationContext(), "lavy gombik", Toast.LENGTH_SHORT).show();
-					positionData.setVerticalMovement(-1);
+					//positionData.setVerticalMovement(-1);
+					positionData.setRotation(-1);
 				}
 				else if (event.getAction() == MotionEvent.ACTION_UP){
 					buttonLeft.setImageResource(R.drawable.button_left);
-					positionData.setVerticalMovement(0);
+					//positionData.setVerticalMovement(0);
+					positionData.setRotation(0);
 				}
 				return true;
 			}
@@ -225,11 +227,13 @@ public abstract class MotionActivity extends Activity implements SensorEventList
 				if (event.getAction() == MotionEvent.ACTION_DOWN){
 					buttonRight.setImageResource(R.drawable.button_right_down);
 					//Toast.makeText(getApplicationContext(), "pravy gombik", Toast.LENGTH_SHORT).show();
-					positionData.setVerticalMovement(1);
+					//positionData.setVerticalMovement(1);
+					positionData.setRotation(1);
 				}
 				else if (event.getAction() == MotionEvent.ACTION_UP){
 					buttonRight.setImageResource(R.drawable.button_right);
-					positionData.setVerticalMovement(0);
+					//positionData.setVerticalMovement(0);
+					positionData.setRotation(0);
 				}
 				return true;
 			}

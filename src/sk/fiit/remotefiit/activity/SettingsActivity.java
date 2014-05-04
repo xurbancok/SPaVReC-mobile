@@ -218,11 +218,14 @@ public class SettingsActivity extends Activity implements SensorEventListener{
 	protected void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this);
-        fs.storeData(valueForwards, valueBackwards, valueLeft, valueRight,1,1,1,1);//stara kalibracia, podla jednej hodnoty
+        fs.storeData(valueForwards, valueBackwards, valueLeft, valueRight,1,1,1,1,3,-3);//stara kalibracia, podla jednej hodnoty
         CalibrationData.setTiltBackwards(valueBackwards);
         CalibrationData.setTiltForwards(valueForwards);
         CalibrationData.setTiltLeft(valueLeft);
-        CalibrationData.setTiltRight(valueRight);  
+        CalibrationData.setTiltRight(valueRight); 
+		CalibrationData.setVeticalMovementUp(3);
+		CalibrationData.setVeticalMovementDown(-3);
+        
         Log.d("VR", "Left: "+valueLeft+"\nRight: "+valueRight+"\nUp: "+valueForwards+"\nDown: "+valueBackwards);
 
     }

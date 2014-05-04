@@ -98,10 +98,10 @@ public class DataToMovementTransformation implements DataTransformation{
 			avg = sum/11;
 			CalibrationData.setTiltForwards(avg);
 			CalibrationData.setTiltForwardsCount(10);
-			
-			if(inputData.getAccelerometerY() < CalibrationData.getTiltForwards()){
-				output.add(Movement.MOVE_FORWARDS);
-			}
+			output.add(Movement.MOVE_FORWARDS);
+//			if(inputData.getAccelerometerY() < CalibrationData.getTiltForwards()){
+//				output.add(Movement.MOVE_FORWARDS);
+//			}
 		}
 		else if(inputData.getAccelerometerY() > (CalibrationData.getTiltBackwards()*treshold)){
 			Log.d("VR", "kalibrujem back");
@@ -111,10 +111,11 @@ public class DataToMovementTransformation implements DataTransformation{
 			avg = sum/11;
 			CalibrationData.setTiltBackwards(avg);
 			CalibrationData.setTiltBackwardsCount(10);		
+			output.add(Movement.MOVE_BACKWARDS);
 			
-			if(inputData.getAccelerometerY() > CalibrationData.getTiltBackwards()){
-				output.add(Movement.MOVE_BACKWARDS);
-			}
+//			if(inputData.getAccelerometerY() > CalibrationData.getTiltBackwards()){
+//				output.add(Movement.MOVE_BACKWARDS);
+//			}
 		}
 		if(inputData.getAccelerometerX() > CalibrationData.getTiltLeft()*treshold){
 			Log.d("VR", "kalibrujem left");
@@ -124,9 +125,11 @@ public class DataToMovementTransformation implements DataTransformation{
 			avg = sum/11;
 			CalibrationData.setTiltLeft(avg);
 			CalibrationData.setTiltLeftCount(10);
-			if(inputData.getAccelerometerX() > (CalibrationData.getTiltLeft())){
-				output.add(Movement.MOVE_LEFT);
-			}
+			output.add(Movement.MOVE_LEFT);
+			
+//			if(inputData.getAccelerometerX() > (CalibrationData.getTiltLeft())){
+//				output.add(Movement.MOVE_LEFT);
+//			}
 		}
 		else if(inputData.getAccelerometerX() < (CalibrationData.getTiltRight()*treshold)){
 			Log.d("VR", "kalibrujem right");
@@ -136,9 +139,11 @@ public class DataToMovementTransformation implements DataTransformation{
 			avg = sum/11;
 			CalibrationData.setTiltRight(avg);
 			CalibrationData.setTiltRightCount(10);
-			if(inputData.getAccelerometerX() < (CalibrationData.getTiltRight())){
-				output.add(Movement.MOVE_RIGHT);
-			}
+			output.add(Movement.MOVE_RIGHT);
+			
+//			if(inputData.getAccelerometerX() < (CalibrationData.getTiltRight())){
+//				output.add(Movement.MOVE_RIGHT);
+//			}
 		}
 /*
 		if(inputData.getAccelerometerY() < 4 && inputData.getAccelerometerY() >= 3){
@@ -208,9 +213,11 @@ public class DataToMovementTransformation implements DataTransformation{
 			avg = sum/11;
 			CalibrationData.setTiltForwards(avg);
 			CalibrationData.setTiltForwardsCount(10);
-			if(inputData.getAccelerometerY() < CalibrationData.getTiltForwards()){
-				output.add(Movement.MOVE_FORWARDS);
-			}
+			output.add(Movement.MOVE_FORWARDS);
+			
+//			if(inputData.getAccelerometerY() < CalibrationData.getTiltForwards()){
+//				output.add(Movement.MOVE_FORWARDS);
+//			}
 		}
 		else if(inputData.getAccelerometerY() > (CalibrationData.getTiltBackwards()*treshold)){
 			Log.d("VR", "kalibrujem back");
@@ -220,10 +227,11 @@ public class DataToMovementTransformation implements DataTransformation{
 			avg = sum/11;
 			CalibrationData.setTiltBackwards(avg);
 			CalibrationData.setTiltBackwardsCount(10);		
+			output.add(Movement.MOVE_BACKWARDS);
 			
-			if(inputData.getAccelerometerY() > CalibrationData.getTiltBackwards()){
-				output.add(Movement.MOVE_BACKWARDS);
-			}
+//			if(inputData.getAccelerometerY() > CalibrationData.getTiltBackwards()){
+//				output.add(Movement.MOVE_BACKWARDS);
+//			}
 		}
 		if(inputData.getAccelerometerX() > CalibrationData.getTiltLeft()*treshold){
 			Log.d("VR", "kalibrujem left");
@@ -233,9 +241,11 @@ public class DataToMovementTransformation implements DataTransformation{
 			avg = sum/11;
 			CalibrationData.setTiltLeft(avg);
 			CalibrationData.setTiltLeftCount(10);
-			if(inputData.getAccelerometerX() > (CalibrationData.getTiltLeft())){
-				output.add(Movement.MOVE_LEFT);
-			}
+			output.add(Movement.MOVE_LEFT);
+			
+//			if(inputData.getAccelerometerX() > (CalibrationData.getTiltLeft())){
+//				output.add(Movement.MOVE_LEFT);
+//			}
 		}
 		else if(inputData.getAccelerometerX() < (CalibrationData.getTiltRight()*treshold)){
 			Log.d("VR", "kalibrujem right");
@@ -245,9 +255,11 @@ public class DataToMovementTransformation implements DataTransformation{
 			avg = sum/11;
 			CalibrationData.setTiltRight(avg);
 			CalibrationData.setTiltRightCount(10);
-			if(inputData.getAccelerometerX() < (CalibrationData.getTiltRight())){
-				output.add(Movement.MOVE_RIGHT);
-			}
+			output.add(Movement.MOVE_RIGHT);
+			
+//			if(inputData.getAccelerometerX() < (CalibrationData.getTiltRight())){
+//				output.add(Movement.MOVE_RIGHT);
+//			}
 		}
 		
 		
@@ -324,6 +336,12 @@ public class DataToMovementTransformation implements DataTransformation{
 		}else if(inputData.getVerticalMovement() == -1){
 			output.add(Movement.MOVE_DOWN);
 		}
+		if(inputData.getRotation()==-1){
+			output.add(Movement.ROTATE_CCW);
+		}else if(inputData.getRotation()==1){
+			output.add(Movement.ROTATE_CW);
+		}
+		
 		return output;
 	}
 
@@ -340,9 +358,11 @@ public class DataToMovementTransformation implements DataTransformation{
 			avg = sum/count;
 			CalibrationData.setTiltLeft(avg);
 			CalibrationData.setTiltLeftCount(count);
-			if(inputData.getAccelerometerY() < -CalibrationData.getTiltLeft()){	
-				output.add(Movement.LOOK_LEFT);
-			}
+			output.add(Movement.LOOK_LEFT);
+			
+//			if(inputData.getAccelerometerY() < -CalibrationData.getTiltLeft()){	
+//				output.add(Movement.LOOK_LEFT);
+//			}
 		}
 		else if(inputData.getAccelerometerY() > (-CalibrationData.getTiltRight()*treshold)){
 			Log.d("VR", "kalibrujem right");
@@ -352,9 +372,11 @@ public class DataToMovementTransformation implements DataTransformation{
 			avg = sum/11;
 			CalibrationData.setTiltRight(avg);
 			CalibrationData.setTiltRightCount(10);
-			if(inputData.getAccelerometerY() > -CalibrationData.getTiltRight()){
-				output.add(Movement.LOOK_RIGHT);
-			}
+			output.add(Movement.LOOK_RIGHT);
+			
+//			if(inputData.getAccelerometerY() > -CalibrationData.getTiltRight()){
+//				output.add(Movement.LOOK_RIGHT);
+//			}
 		}
 
 		if((inputData.getAccelerometerX() < (CalibrationData.getTiltForwards()*tresholdNeg))||(inputData.getAccelerometerX() < (CalibrationData.getTiltForwards()*treshold))){
@@ -365,9 +387,11 @@ public class DataToMovementTransformation implements DataTransformation{
 			avg = sum/11;
 			CalibrationData.setTiltForwards(avg);
 			CalibrationData.setTiltForwardsCount(10);
-			if(inputData.getAccelerometerX() < CalibrationData.getTiltForwards()){
-				output.add(Movement.MOVE_FORWARDS);
-			}	
+			output.add(Movement.MOVE_FORWARDS);
+			
+//			if(inputData.getAccelerometerX() < CalibrationData.getTiltForwards()){
+//				output.add(Movement.MOVE_FORWARDS);
+//			}	
 		}
 		else if(inputData.getAccelerometerX() > (CalibrationData.getTiltBackwards()*treshold)){
 			Log.d("VR", "kalibrujem back");
@@ -377,10 +401,11 @@ public class DataToMovementTransformation implements DataTransformation{
 			avg = sum/11;
 			CalibrationData.setTiltBackwards(avg);
 			CalibrationData.setTiltBackwardsCount(10);
+			output.add(Movement.MOVE_BACKWARDS);
 			
-			if(inputData.getAccelerometerX() > CalibrationData.getTiltBackwards()){
-				output.add(Movement.MOVE_BACKWARDS);
-			}
+//			if(inputData.getAccelerometerX() > CalibrationData.getTiltBackwards()){
+//				output.add(Movement.MOVE_BACKWARDS);
+//			}
 		}	
 
 /*

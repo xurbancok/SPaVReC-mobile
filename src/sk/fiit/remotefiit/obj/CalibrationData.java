@@ -6,10 +6,13 @@ public class CalibrationData {
 	private static int tiltForwardsCount, tiltBackwardsCount, tiltLeftCount, tiltRightCount;
 	private static FileStorage fs = new FileStorage();
 
+	private static double  veticalMovementUp;
+	private static double  veticalMovementDown;
+	
 	private static double noiseX, noiseY;
 	
 	public enum Tilting{
-		TILT_LEFT, TILT_RIGHT, TILT_FORWARDS, TILT_BACKWARDS;
+		TILT_LEFT, TILT_RIGHT, TILT_FORWARDS, TILT_BACKWARDS, UP, DOWN;
 	}
 
 	private CalibrationData() {
@@ -101,5 +104,21 @@ public class CalibrationData {
 
 	public static void setNoiseY(double noiseY) {
 		CalibrationData.noiseY = noiseY;
+	}
+
+	public static double getVeticalMovementUp() {
+		return veticalMovementUp;
+	}
+
+	public static void setVeticalMovementUp(double veticalMovementUp) {
+		CalibrationData.veticalMovementUp = veticalMovementUp;
+	}
+
+	public static double getVeticalMovementDown() {
+		return veticalMovementDown;
+	}
+
+	public static void setVeticalMovementDown(double veticalMovementDown) {
+		CalibrationData.veticalMovementDown = veticalMovementDown;
 	}
 }

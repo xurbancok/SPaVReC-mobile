@@ -28,8 +28,9 @@ public class PositionData {
 	private boolean joystickRight = false;
 	private boolean joystickUp = false;
 	private boolean joystickDown = false;
-	
+
 	private int verticalMovement = 0;
+	private int rotation = 0;
 	private boolean reset = true;
 	
 	public void setProximity(double proximity) {
@@ -224,4 +225,11 @@ public class PositionData {
 		this.reset = reset;
 	}
 
+	public int getRotation() {
+		return rotation;
+	}
+
+	public void setRotation(int rotation) {
+		this.rotation = rotation;
+	}
 }

@@ -30,7 +30,11 @@ public class MotionActivityHelicopter extends MotionActivity{
 	private Float[] linear_acceleration = {0f,0f,0f};
 	private long time = 0;
 	private int timeDelay = 500; //500milisekund
+	
 	private float windowFilter = 3.0f;
+	
+	private double windowFilterUp = CalibrationData.getVeticalMovementUp()*0.9;
+	private double windowFilterDown = CalibrationData.getVeticalMovementDown()*0.9;
 	
 	private double xRange;
 	private double yRange;
@@ -62,6 +66,9 @@ public class MotionActivityHelicopter extends MotionActivity{
 			Toast.makeText(getApplicationContext(), "Error: Accelerometer is missing", Toast.LENGTH_SHORT).show();
 			finish();
 			return;
+		}else if(linearAcceleration==null){
+			Toast.makeText(getApplicationContext(), "Error: Linear acceleration sensor is missing", Toast.LENGTH_SHORT).show();
+			finish();
 		}		
 		
 		senzorRegistering();
@@ -142,10 +149,14 @@ public class MotionActivityHelicopter extends MotionActivity{
 			Toast.makeText(getApplicationContext(), "Error: Accelerometer is missing", Toast.LENGTH_SHORT).show();
 			finish();
 			return;
+		}else if(linearAcceleration==null){
+			Toast.makeText(getApplicationContext(), "Error: Linear acceleration sensor is missing", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
 		}
 		
 		if(accelerometer!=null && mSensorManager!=null)mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-		//if(linearAcceleration!=null && mSensorManager!=null)mSensorManager.registerListener(this, linearAcceleration, SensorManager.SENSOR_DELAY_NORMAL);
+		if(linearAcceleration!=null && mSensorManager!=null)mSensorManager.registerListener(this, linearAcceleration, SensorManager.SENSOR_DELAY_NORMAL);
 		timerHandler.postDelayed(timerRunnable, 0);
 	}
 
@@ -180,13 +191,13 @@ public class MotionActivityHelicopter extends MotionActivity{
 //	        Log.d("SENZOR","acc0 " +event.values[0]+" "+event.values[1]+" "+event.values[2]);
 //	        Log.d("SENZOR","acc1 " +linear_acceleration[0]+" "+linear_acceleration[1]+" "+linear_acceleration[2]);
 			break;
-/*
+
 		case (Sensor.TYPE_LINEAR_ACCELERATION):
 			positionData.setLinearAccelerationX(event.values[0]);
 			positionData.setLinearAccelerationY(event.values[1]);
 			positionData.setLinearAccelerationZ(event.values[2]);
 			
-			if(event.values[2]<-windowFilter){
+			if(event.values[2]<windowFilterDown){
 				//ideme dole
 				Log.d("SENZOR", "rozdiel: "+ (System.currentTimeMillis()-time));
 				if((System.currentTimeMillis()-time)>timeDelay){
@@ -194,7 +205,7 @@ public class MotionActivityHelicopter extends MotionActivity{
 					//Log.d("SENZOR", "ideme dole");
 					time = System.currentTimeMillis();
 				}
-			}else if(event.values[2]>windowFilter){
+			}else if(event.values[2]>windowFilterUp){
 				//ideme hore
 				Log.d("SENZOR", "rozdiel: "+ (System.currentTimeMillis()-time));
 				if(System.currentTimeMillis()-time>timeDelay){	
@@ -205,7 +216,7 @@ public class MotionActivityHelicopter extends MotionActivity{
 			}
 			
 			break;
-			*/
+			
 		}
 	}
 
@@ -215,7 +226,7 @@ public class MotionActivityHelicopter extends MotionActivity{
         mSensorManager.unregisterListener(this);
         timerHandler.removeCallbacks(timerRunnable);
         fs.storeData(CalibrationData.getTiltForwards(), CalibrationData.getTiltBackwards(), CalibrationData.getTiltLeft(), CalibrationData.getTiltRight(), 
-				CalibrationData.getTiltForwardsCount(), CalibrationData.getTiltBackwardsCount(), CalibrationData.getTiltLeftCount(), CalibrationData.getTiltRightCount());
+				CalibrationData.getTiltForwardsCount(), CalibrationData.getTiltBackwardsCount(), CalibrationData.getTiltLeftCount(), CalibrationData.getTiltRightCount(),CalibrationData.getVeticalMovementUp(),CalibrationData.getVeticalMovementDown());
 
     }
 }

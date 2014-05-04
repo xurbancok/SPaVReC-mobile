@@ -41,6 +41,7 @@ public class CalibrationActivity extends Activity implements SensorEventListener
 	
 	private SensorManager mSensorManager;
 	private Sensor accelerometer;
+	private Sensor linearAcceleration;
 	private Tilting tilt;
 	private ImageView startButton;
 	private ImageView nextButton;
@@ -87,6 +88,16 @@ public class CalibrationActivity extends Activity implements SensorEventListener
 					startActivityForResult(i, 10);
 					break;
 				case TILT_BACKWARDS:
+					i = new Intent(getApplicationContext(),CalibrationActivity.class);
+					i.putExtra("tilt", Tilting.UP.toString());
+					startActivityForResult(i, 10);
+					break;
+				case UP:
+					i = new Intent(getApplicationContext(),CalibrationActivity.class);
+					i.putExtra("tilt", Tilting.DOWN.toString());
+					startActivityForResult(i, 10);
+					break;
+				case DOWN:
 					Toast.makeText(getApplicationContext(), "Calibration done", Toast.LENGTH_SHORT).show();
 					setResult(10, null);
 					finish();
@@ -108,8 +119,10 @@ public class CalibrationActivity extends Activity implements SensorEventListener
 							Thread.sleep(2000);
 							final Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
 						vibrator.vibrate(100);
-						if (accelerometer != null && mSensorManager != null)
+						if (accelerometer != null && mSensorManager != null){
 							mSensorManager.registerListener(CalibrationActivity.this, accelerometer,SensorManager.SENSOR_DELAY_NORMAL);
+							mSensorManager.registerListener(CalibrationActivity.this, linearAcceleration,SensorManager.SENSOR_DELAY_NORMAL);
+						}
 						Timer timer = new Timer();
 						timer.schedule(new TimerTask() {
 							@Override
@@ -158,6 +171,18 @@ public class CalibrationActivity extends Activity implements SensorEventListener
 			instructions.setImageResource(R.drawable.tilt_backwards);
 			frameAnimation = (AnimationDrawable) instructions.getDrawable();
 			frameAnimation.start();
+			break;
+		case UP:
+			textViewTilting.setText(Html.fromHtml("Please <b><u>move<\\u><\\b>")+" your device "+Html.fromHtml("<b><u>UP<\\u><\\b>"));
+			instructions.setImageResource(R.drawable.move_up);
+			frameAnimation = (AnimationDrawable) instructions.getDrawable();
+			frameAnimation.start();
+			break;
+		case DOWN:
+			textViewTilting.setText(Html.fromHtml("Please <b><u>move<\\u><\\b>")+" your device "+Html.fromHtml("<b><u>DOWN<\\u><\\b>"));
+			instructions.setImageResource(R.drawable.move_down);
+			frameAnimation = (AnimationDrawable) instructions.getDrawable();
+			frameAnimation.start();
 			nextButton.setImageResource(R.drawable.finish);
 			break;
 		}
@@ -165,6 +190,7 @@ public class CalibrationActivity extends Activity implements SensorEventListener
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		if(mSensorManager != null){
 			if(mSensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER)!=null)accelerometer = mSensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER).get(0);
+			if(mSensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION)!=null)linearAcceleration = mSensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION).get(0);
 		}
 		if(mSensorManager == null){
 			Toast.makeText(getApplicationContext(), "Error: Sensor Manager is missing", Toast.LENGTH_SHORT).show();
@@ -172,6 +198,10 @@ public class CalibrationActivity extends Activity implements SensorEventListener
 			return;
 		}else if(accelerometer==null){
 			Toast.makeText(getApplicationContext(), "Error: Accelerometer is missing", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}else if(linearAcceleration==null){
+			Toast.makeText(getApplicationContext(), "Error: Linear acceleration sensor is missing", Toast.LENGTH_SHORT).show();
 			finish();
 			return;
 		}
@@ -203,8 +233,17 @@ public class CalibrationActivity extends Activity implements SensorEventListener
 				values.add(roundTwoDecimals(event.values[1]));
 				break;
 			}
-
 			break;	
+		case (Sensor.TYPE_LINEAR_ACCELERATION):
+			switch(tilt){
+			case UP:
+				values.add(roundTwoDecimals(event.values[2]));
+				break;
+			case DOWN:
+				values.add(roundTwoDecimals(event.values[2]));
+				break;
+			}
+			break;
 		}
 		
 	}
@@ -218,6 +257,10 @@ public class CalibrationActivity extends Activity implements SensorEventListener
 			return;
 		}else if(accelerometer==null){
 			Toast.makeText(getApplicationContext(), "Error: Accelerometer is missing", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}else if(linearAcceleration==null){
+			Toast.makeText(getApplicationContext(), "Error: Linear acceleration sensor is missing", Toast.LENGTH_SHORT).show();
 			finish();
 			return;
 		}
@@ -273,10 +316,18 @@ public class CalibrationActivity extends Activity implements SensorEventListener
 			CalibrationData.setTiltBackwardsCount(10);
 	        Toast.makeText(getApplicationContext(), CalibrationData.getTiltBackwards()+" "+CalibrationData.getTiltBackwardsCount(), Toast.LENGTH_SHORT).show();
 			break;
+		case UP:
+			CalibrationData.setVeticalMovementUp(roundTwoDecimals(Collections.max(values)));
+	        Toast.makeText(getApplicationContext(), String.valueOf(CalibrationData.getVeticalMovementUp()), Toast.LENGTH_SHORT).show();
+			break;
+		case DOWN:
+			CalibrationData.setVeticalMovementDown(roundTwoDecimals(Collections.min(values)));
+	        Toast.makeText(getApplicationContext(), String.valueOf(CalibrationData.getVeticalMovementDown()), Toast.LENGTH_SHORT).show();
+			break;
 		}
 		DataStorage fs = new FileStorage();
 		fs.storeData(CalibrationData.getTiltForwards(), CalibrationData.getTiltBackwards(), CalibrationData.getTiltLeft(), CalibrationData.getTiltRight(), 
-				CalibrationData.getTiltForwardsCount(), CalibrationData.getTiltBackwardsCount(), CalibrationData.getTiltLeftCount(), CalibrationData.getTiltRightCount());
+				CalibrationData.getTiltForwardsCount(), CalibrationData.getTiltBackwardsCount(), CalibrationData.getTiltLeftCount(), CalibrationData.getTiltRightCount(),CalibrationData.getVeticalMovementUp(),CalibrationData.getVeticalMovementDown());
 		
      }
 	
