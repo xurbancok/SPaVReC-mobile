@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textStyle="bold"
         android:text="Sensor calibration"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -21,7 +22,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView1"
         android:layout_marginTop="19dp"
-        android:text="Instruction: Press &quot;Start&quot; button to start calibration. After short vibration tilt or move your device as you see in the picture. After second vibration of device the calibration is done."
+        android:text="Instruction: Press &quot;Start&quot; button to start calibration. After short vibration tilt or move your device as you can see in the picture. After second vibration of device the calibration is done."
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView

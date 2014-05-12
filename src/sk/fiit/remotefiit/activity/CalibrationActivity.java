@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.os.Vibrator;
 import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -149,37 +150,37 @@ public class CalibrationActivity extends Activity implements SensorEventListener
 		AnimationDrawable frameAnimation;
 		switch(tilt){
 		case TILT_LEFT:
-			textViewTilting.setText(Html.fromHtml("Please tilt your device to the <b><u>LEFT<\\u><\\b>"));
+			textViewTilting.setText(Html.fromHtml("Please <u><strong>tilt</strong></u> your device to the <u><strong>LEFT</strong></u>"));
 			instructions.setImageResource(R.drawable.tilt_left);
 			frameAnimation = (AnimationDrawable) instructions.getDrawable();
 			frameAnimation.start();
 			break;
 		case TILT_RIGHT:
-			textViewTilting.setText(Html.fromHtml("Please tilt your device to the <b><u>RIGHT<\\u><\\b>"));
+			textViewTilting.setText(Html.fromHtml("Please <u><strong>tilt</strong></u> your device to the <u><strong>RIGHT</strong></u>"));
 			instructions.setImageResource(R.drawable.tilt_right);
 			frameAnimation = (AnimationDrawable) instructions.getDrawable();
 			frameAnimation.start();
 			break;
 		case TILT_FORWARDS:
-			textViewTilting.setText(Html.fromHtml("Please tilt your device <b><u>FORWARDS<\\u><\\b>"));
+			textViewTilting.setText(Html.fromHtml("Please <u><strong>tilt</strong></u> your device <u><strong>FORWARDS</strong></u>"));
 			instructions.setImageResource(R.drawable.tilt_forwards);
 			frameAnimation = (AnimationDrawable) instructions.getDrawable();
 			frameAnimation.start();
 			break;
 		case TILT_BACKWARDS:
-			textViewTilting.setText(Html.fromHtml("Please tilt your device <b><u>BACKWARDS<\\u><\\b>"));
+			textViewTilting.setText(Html.fromHtml("Please <u><strong>tilt</strong></u> your device <u><strong>BACKWARDS</strong></u>"));
 			instructions.setImageResource(R.drawable.tilt_backwards);
 			frameAnimation = (AnimationDrawable) instructions.getDrawable();
 			frameAnimation.start();
 			break;
 		case UP:
-			textViewTilting.setText(Html.fromHtml("Please <b><u>move<\\u><\\b>")+" your device "+Html.fromHtml("<b><u>UP<\\u><\\b>"));
+			textViewTilting.setText(Html.fromHtml("Please <u><strong>move</strong></u> your device <u><strong>UP</strong></u>"));
 			instructions.setImageResource(R.drawable.move_up);
 			frameAnimation = (AnimationDrawable) instructions.getDrawable();
 			frameAnimation.start();
 			break;
 		case DOWN:
-			textViewTilting.setText(Html.fromHtml("Please <b><u>move<\\u><\\b>")+" your device "+Html.fromHtml("<b><u>DOWN<\\u><\\b>"));
+			textViewTilting.setText(Html.fromHtml("Please <u><strong>move</strong></u> your device <u><strong>DOWN</strong></u>"));
 			instructions.setImageResource(R.drawable.move_down);
 			frameAnimation = (AnimationDrawable) instructions.getDrawable();
 			frameAnimation.start();
